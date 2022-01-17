@@ -1,0 +1,75 @@
+body{
+	height: 95vh;
+}
+
+#main-div{
+	display: grid;
+	height: 100%;
+	column-gap: 10px;
+	row-gap: 10px;
+	grid-template-columns: 1.5fr 1fr;
+	grid-template-areas: "editor output"
+						"editor video-grid"
+						"controls controls";
+}
+
+#editor{
+	grid-area: editor;
+	height: 86vh;
+	width: 100%;
+}
+
+#output{
+	background-color: black;
+	grid-area: output;
+	height: 64vh;
+}
+
+#video-grid {
+	grid-area: video-grid;
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+video {
+	object-fit: cover;
+}
+
+.video-player{
+	height: 20vh;
+	width: 20vh;
+}
+
+#controls{
+	grid-area: controls;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 10vh;
+	width: 100%;
+	background-color: black;
+}
+
+.material-icons{
+	font-size: 32px;
+	cursor: pointer;
+}
+
+.control-btn{
+	background-color: ghostwhite;
+	width: fit-content;
+	padding: 8px;
+	margin: 10px;
+	border-radius: 3rem;
+}
+
+/* #mute_audio{
+	background-color: ghostwhite;
+	width: fit-content;
+}
+
+#mute_video{
+	background-color: ghostwhite;
+	width: fit-content;
+} */
