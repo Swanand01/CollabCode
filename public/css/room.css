@@ -30,6 +30,7 @@ body{
 	display: flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
+	column-gap: 10px;
 }
 
 video {
