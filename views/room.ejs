@@ -21,9 +21,24 @@
 </head>
 
 <body>
+	<div id="header">
+		<div id="run-code-btn">RUN</div>
+	</div>
 	<div id="main-div">
-		<div id="editor"></div>
-		<div id="output">
+		<div id="code-area">
+			<div id="language">
+				<select name="language" id="language-dropdown">
+					<option value="" selected hidden>Language</option>
+					<option value="saab">Saab</option>
+					<option value="opel">Opel</option>
+					<option value="audi">Audi</option>
+				</select>
+			</div>
+			<div id="editor"></div>
+		</div>
+		<div id="input-output">
+			<textarea name="input" id="input" placeholder="Input goes here..."></textarea>
+			<div id="output"></div>
 		</div>
 		<div id="video-grid">
 		</div>

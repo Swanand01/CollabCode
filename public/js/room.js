@@ -7,7 +7,7 @@ let UID;
 async function fetchCred() {
 	let response = await fetch(`/getToken/${CHANNEL}`);
 	let data = await response.json();
-	
+
 	TOKEN = data.token;
 	UID = Number(data.uid);
 }
@@ -102,7 +102,7 @@ socket.on('user-connected', async userId => {
 let editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/javascript");
-editor.setFontSize(16)
+editor.setFontSize(18);
 
 editor.on('change', delta => {
 	if (!applyingChanges) {
@@ -138,18 +138,52 @@ muteVideoBtn.addEventListener("click", async () => {
 })
 
 
-
-function addVideoStream(video, stream) {
-	video.srcObject = stream;
-	video.addEventListener('loadedmetadata', () => {
-		video.play();
-	});
-	videoGrid.append(video);
-}
-
-
 function delay(n) {
 	return new Promise(function (resolve) {
 		setTimeout(resolve, n * 1000);
 	});
 }
+
+
+const outputDiv = document.getElementById("output");
+function runCode() {
+	let code = editor.getValue();
+	let input = document.getElementById("input").value;
+	console.log(input);
+
+	if (code) {
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+
+		var raw = JSON.stringify({
+			"language": "python",
+			"version": "3.10.0",
+			"files": [
+				{
+					"content": `${code}`
+				}
+			],
+			"stdin": input,
+			"compile_timeout": 10000,
+			"run_timeout": 3000,
+			"compile_memory_limit": -1,
+			"run_memory_limit": -1
+		});
+
+		var requestOptions = {
+			method: 'POST',
+			headers: myHeaders,
+			body: raw,
+			redirect: 'follow'
+		};
+
+		fetch("https://emkc.org/api/v2/piston/execute", requestOptions)
+			.then(response => response.text())
+			.then(result => {
+				outputDiv.innerHTML = JSON.parse(result).run.output;
+			})
+			.catch(error => console.log('error', error));
+	}
+}
+
+document.getElementById("run-code-btn").addEventListener("click", runCode)
