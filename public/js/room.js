@@ -136,7 +136,7 @@ muteAudioBtn.addEventListener("click", async () => {
 	}
 	else {
 		muteAudioBtn.innerHTML = "mic_off";
-		muteAudioBtn.style.backgroundColor = 'red';
+		muteAudioBtn.style.backgroundColor = '#e22929';
 		muteAudioBtn.style.color = 'white';
 	}
 
@@ -151,7 +151,7 @@ muteAudioBtn.addEventListener("click", async () => {
 muteVideoBtn.addEventListener("click", async () => {
 	if (videoTrack.enabled) {
 		muteVideoBtn.innerHTML = "videocam_off";
-		muteVideoBtn.style.backgroundColor = 'red';
+		muteVideoBtn.style.backgroundColor = '#e22929';
 		muteVideoBtn.style.color = 'white';
 		await videoTrack.setEnabled(false);
 	} else {
