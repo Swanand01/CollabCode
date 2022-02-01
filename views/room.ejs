@@ -12,12 +12,19 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="css/room.css">
 
-	<script defer src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
-	<script defer src="/socket.io/socket.io.js"></script>
-	<script defer src="js/ace.js" type="text/javascript" charset="utf-8"></script>
-	<script defer src="js/AgoraRTC_N-4.8.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/AgoraRTC_N-4.8.1.js" type="text/javascript" charset="utf-8"></script>
 
-	<script defer src="js/room.js"></script>
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
+
+	<!-- Firepad -->
+	<link rel="stylesheet" href="https://firepad.io/releases/v1.5.10/firepad.css" />
+	<script src="https://firepad.io/releases/v1.5.10/firepad.min.js"></script>
+
 </head>
 
 <body>
@@ -28,17 +35,22 @@
 		<div id="code-area">
 			<div id="language">
 				<select name="language" id="language-dropdown">
-					<option value="" selected hidden>Language</option>
-					<option value="saab">Saab</option>
-					<option value="opel">Opel</option>
-					<option value="audi">Audi</option>
+					<option value="python">Python</option>
+					<option value="javascript">Javascript</option>
+					<option value="c">C</option>
+					<option value="c++">C++</option>
+					<option value="go">Go</option>
+					<option value="java">Java</option>
+					<option value="csharp">C#</option>
 				</select>
 			</div>
-			<div id="editor"></div>
+			<div id="firepad"></div>
 		</div>
 		<div id="input-output">
-			<textarea name="input" id="input" placeholder="Input goes here..."></textarea>
-			<div id="output"></div>
+			<textarea name="input" id="input" placeholder="Input goes here."></textarea>
+			<div id="output">
+				Output will appear here.
+			</div>
 		</div>
 		<div id="video-grid">
 		</div>
@@ -48,5 +60,6 @@
 		</div>
 	</div>
 </body>
+<script src="js/room.js"></script>
 
 </html>

@@ -24,7 +24,7 @@ body{
 
 	display: grid;
 	grid-template-areas: "language"
-						"editor";
+						"firepad";
 	grid-template-rows: 1fr 15fr;
 	height: 82vh;
 }
@@ -40,8 +40,8 @@ body{
 	left: 45%;
 }
 
-#editor{
-	grid-area: editor;
+#firepad{
+	grid-area: firepad;
 	height: 100%;
 	width: 100%;
 }

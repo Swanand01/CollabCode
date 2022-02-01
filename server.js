@@ -49,6 +49,14 @@ io.on("connection", socket => {
 		socket.on("code-change", (delta) => {
 			socket.broadcast.to(roomId).emit("code-change", delta);
 		})
+
+		socket.on("code-output", (output) => {
+			socket.broadcast.to(roomId).emit("code-output", output);
+		})
+
+		socket.on("language-change", (language) => {
+			socket.broadcast.to(roomId).emit("language-change", language);
+		})
 	})
 })
 
