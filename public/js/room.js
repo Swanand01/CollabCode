@@ -1,9 +1,17 @@
-let editor = ace.edit("firepad");
-editor.setTheme("ace/theme/monokai");
-editor.session.setUseWrapMode(true);
-editor.session.setUseWorker(false);
-editor.session.setMode("ace/mode/javascript");
-editor.setFontSize(16);
+let editor = CodeMirror.fromTextArea(document.querySelector("#firepad"), {
+	mode: "python",
+	theme: "dracula",
+	lineNumbers: true,
+	extraKeys: {
+		"Ctrl-Space": "autocomplete"
+	},
+})
+editor.on("keyup", function (cm, event) {
+	if (!cm.state.completionActive &&   /*Enables keyboard navigation in autocomplete list*/
+		event.keyCode > 64 && event.keyCode < 91) {// only when a letter key is pressed
+		CodeMirror.commands.autocomplete(cm, null, { completeSingle: false });
+	}
+});
 
 function init() {
 	// Initialize the Firebase SDK.
@@ -16,8 +24,8 @@ function init() {
 	let firepadRef = firebase.database().ref().child(ROOM_ID);
 
 	// Create Firepad (with rich text toolbar and shortcuts enabled).
-	let firepad = Firepad.fromACE(firepadRef, editor, {
-		defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
+	let firepad = Firepad.fromCodeMirror(firepadRef, editor, {
+		defaultText: ''
 	});
 }
 
@@ -72,13 +80,11 @@ async function joinAndDisplayLocalStream() {
 	videoTrack.play(`user-${UID}`);
 
 
-	console.log("Publishing stream...");
 	await delay(1);
 	await client.publish([audioTrack, videoTrack]);
 }
 
 async function handleUserJoined(user, mediaType) {
-	console.log("RECEIVING USER STREAM...");
 	remoteUsers[user.uid] = user;
 	await client.subscribe(user, mediaType);
 
@@ -137,10 +143,8 @@ muteAudioBtn.addEventListener("click", async () => {
 	// Check if audio track exists
 	if (audioTrack.muted) {
 		await audioTrack.setMuted(false);
-		console.log("Unmuted");
 	} else {
 		await audioTrack.setMuted(true);
-		console.log("Muted");
 	}
 })
 
@@ -158,11 +162,6 @@ muteVideoBtn.addEventListener("click", async () => {
 	}
 })
 
-function delay(n) {
-	return new Promise(function (resolve) {
-		setTimeout(resolve, n * 1000);
-	});
-}
 
 const outputDiv = document.getElementById("output");
 const languageDropdown = document.getElementById("language-dropdown");
@@ -216,11 +215,12 @@ function runCode() {
 }
 runCodeBtn.addEventListener("click", runCode);
 languageDropdown.addEventListener("change", () => {
-	console.log("Emitting lang change");
 	socket.emit("language-change", languageDropdown.value);
+	changeEditorMode(languageDropdown.value);
 })
 socket.on("language-change", language => {
 	languageDropdown.value = language;
+	changeEditorMode(language);
 });
 
 window.onload = async function () {
@@ -243,4 +243,31 @@ async function getRuntimes() {
 
 	response = await response.text();
 	return JSON.parse(response);
+}
+
+function changeEditorMode(language) {
+	if (language === "python" || language === "javascript") {
+		editor.setOption("mode", language);
+	}
+	else if (language === "java") {
+		editor.setOption("mode", "text/x-java");
+	}
+	else if (language === "c") {
+		editor.setOption("mode", "text/x-csrc");
+	}
+	else if (language === "c++") {
+		editor.setOption("mode", "text/x-c++src");
+	}
+	else if (language === "csharp") {
+		editor.setOption("mode", "text/x-csharp");
+	}
+	else if (language === "go") {
+		editor.setOption("mode", "text/x-go");
+	}
+}
+
+function delay(n) {
+	return new Promise(function (resolve) {
+		setTimeout(resolve, n * 1000);
+	});
 }
