@@ -98,10 +98,19 @@ body{
 	transform: translateY(2px);
 }
 
+#glimpse{
+	display: flex;
+	justify-content: center;
+	margin: 60px 0;
+}
+
+#glimpse-img{
+	width: 85%;
+}
+
 #features{
     display: flex;
     column-gap: 40px;
-    
 }
 
 .feature{
@@ -124,3 +133,10 @@ footer{
 #footer p{
     text-align: center;
 }
+
+@media (max-width: 800px) {
+	#features {
+	  flex-direction: column;
+	  row-gap: 50px;
+	}
+  }
