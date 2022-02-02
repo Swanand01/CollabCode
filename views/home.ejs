@@ -7,15 +7,63 @@
 	<title>CollabCode</title>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- <link rel="stylesheet" href="css/room.css"> -->
-	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
-	<script defer src="js/home.js"></script>
-</head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
 
+	<link rel="stylesheet" href="css/home.css">
+</head>
+<header>
+	<div id="header">
+		<div id="header-title">CollabCode</div>
+	</div>
+</header>
 <body>
 	<div id="main-div">
-		<button id="start-btn">Start</button>
+		<div id="description">
+			<h1>Share code and collaborate in real-time.</h1>
+			<p>An online coding environment for interviews, troubleshooting, teaching & more…</p>
+			<p id="free-to-use">
+				Free to use and 
+				<a href="">
+					open-source.
+				</a>
+			</p>
+		</div>
+		<button id="start-btn">Share code now</button>
+		<div id="features">
+			<div class="feature">
+				<h1 class="feature-title">
+					Feature rich code editor
+				</h1>
+				<div class="feature-description">
+					The CollabCode code editor supports 7+ different languages, and comes with syntax highlighting and auto-complete.
+				</div>
+			</div>
+			<div class="feature">
+				<h1 class="feature-title">
+					In browser compiler
+				</h1>
+				<div class="feature-description">
+					Compile or run your code in the browser using the high performance CollabCode compiler.
+				</div>
+			</div>
+			<div class="feature">
+				<h1 class="feature-title">
+					Video and audio chat
+				</h1>
+				<div class="feature-description">
+					Chat with your fellow collaborators using the inbuilt video and audio chat. 
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
+<footer>
+	<div id="footer">
+		<p>
+			Made with love by <a href="">Swanand</a>.
+		</p>
+	</div>
+</footer>
+<script src="js/home.js"></script>
 
 </html>

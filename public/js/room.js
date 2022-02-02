@@ -85,7 +85,7 @@ async function joinAndDisplayLocalStream() {
 	videoTrack = await AgoraRTC.createCameraVideoTrack();
 
 	let player = `<div  class="video-container" id="user-container-${UID}">
-					<div class="video-player" id="user-${UID}">
+					<div class="video-player" id="user-${UID}"></div>
 				</div>`;
 
 	document.getElementById('video-grid').insertAdjacentHTML('beforeend', player);

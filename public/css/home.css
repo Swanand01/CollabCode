@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+html * {
+	font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+body{
+	height: 90vh;
+	margin: 0;
+	background-color: #151a28;
+}
+
+#header{
+    height: 10vh;
+    background-color: #151a28;
+    position: relative;
+}
+
+#header-title{
+    position: absolute;
+    font-size: 25px;
+    top: 25%;
+    left: 1%;
+}
+
+#main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 70px;
+}
+
+#description h1{
+    font-size: 50px;
+}
+
+#description p{
+    text-align: center;
+    font-size: 25px;
+}
+
+#description #free-to-use{
+    font-size: 18px;
+}
+
+#free-to-use a{
+    color: aqua;
+}
+
+#start-btn{
+    height: 75px;
+	width: 250px;
+    font-size: 20px;
+
+    margin: 80px 0;
+
+	align-items: center;
+	appearance: none;
+	color: #36395A	;
+	background-color: #3be8b0;
+	box-shadow: #44475a 0 2px 4px,#44475a 0 7px 13px -3px, #1FB264 0 -3px 0 inset;
+	border-radius: 4px;
+	border-width: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	line-height: 1;
+	list-style: none;
+	overflow: hidden;
+	padding-left: 16px;
+	padding-right: 16px;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+	transition: box-shadow .15s,transform .15s;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	white-space: nowrap;
+	will-change: box-shadow,transform;
+
+}
+
+#start-btn:focus {
+	box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+#start-btn:hover {
+	box-shadow: #44475a 0 2px 4px,#44475a 0 7px 13px -3px,#1FB264 0 -3px 0 inset;
+	transform: translateY(-2px);
+}
+
+#start-btn:active {
+	box-shadow: #D6D6E7 0 3px 7px inset;
+	transform: translateY(2px);
+}
+
+#features{
+    display: flex;
+    column-gap: 40px;
+    
+}
+
+.feature{
+    flex: 1;
+}
+
+/* .feature-title{
+
+} */
+
+.feature-description{
+    font-size: 20px;
+}
+
+footer{
+    margin-top: 40px;
+    padding: 10px;
+}
+
+#footer p{
+    text-align: center;
+}
