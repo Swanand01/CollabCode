@@ -6,6 +6,8 @@ let editor = CodeMirror.fromTextArea(document.querySelector("#firepad"), {
 		"Ctrl-Space": "autocomplete"
 	},
 })
+
+
 editor.on("keyup", function (cm, event) {
 	if (!cm.state.completionActive &&   /*Enables keyboard navigation in autocomplete list*/
 		event.keyCode > 64 && event.keyCode < 91) {// only when a letter key is pressed
@@ -13,7 +15,7 @@ editor.on("keyup", function (cm, event) {
 	}
 });
 
-function init() {
+async function init() {
 	// Initialize the Firebase SDK.
 	firebase.initializeApp({
 		apiKey: 'AIzaSyDD-SKMBbTcTtvQ1XyzWNKMPxpNrpATZMM',
@@ -26,6 +28,11 @@ function init() {
 	// Create Firepad (with rich text toolbar and shortcuts enabled).
 	let firepad = Firepad.fromCodeMirror(firepadRef, editor, {
 		defaultText: ''
+	});
+
+	let runtimeRes = await getRuntimes();
+	runtimeRes.forEach(element => {
+		runtimes[element.language] = element.version;
 	});
 }
 
@@ -51,6 +58,11 @@ let videoTrack;
 let remoteUsers = {};
 
 let runtimes = {};
+
+const audioBtn = document.getElementById("audio-btn");
+const videoBtn = document.getElementById("video-btn");
+const audioIcon = document.getElementById("audio_icon");
+const videoIcon = document.getElementById("video_icon");
 
 
 async function fetchCred() {
@@ -79,7 +91,8 @@ async function joinAndDisplayLocalStream() {
 	document.getElementById('video-grid').insertAdjacentHTML('beforeend', player);
 	videoTrack.play(`user-${UID}`);
 
-
+	audioBtn.disabled = false;
+	videoBtn.disabled = false;
 	await delay(1);
 	await client.publish([audioTrack, videoTrack]);
 }
@@ -125,19 +138,17 @@ socket.on('user-connected', async userId => {
 	console.log("New user connected: " + userId);
 })
 
-const muteAudioBtn = document.getElementById("mute_audio");
-const muteVideoBtn = document.getElementById("mute_video");
 
-muteAudioBtn.addEventListener("click", async () => {
-	if (muteAudioBtn.innerHTML === "mic_off") {
-		muteAudioBtn.innerHTML = "mic";
-		muteAudioBtn.style.backgroundColor = 'white';
-		muteAudioBtn.style.color = 'black';
+audioBtn.addEventListener("click", async () => {
+	if (audioIcon.innerHTML === "mic_off") {
+		audioIcon.innerHTML = "mic";
+		audioBtn.style.backgroundColor = '#3be8b0';
+		audioBtn.style.color = 'black';
 	}
 	else {
-		muteAudioBtn.innerHTML = "mic_off";
-		muteAudioBtn.style.backgroundColor = '#e22929';
-		muteAudioBtn.style.color = 'white';
+		audioIcon.innerHTML = "mic_off";
+		audioBtn.style.backgroundColor = '#e22929';
+		audioBtn.style.color = 'white';
 	}
 
 	// Check if audio track exists
@@ -148,22 +159,22 @@ muteAudioBtn.addEventListener("click", async () => {
 	}
 })
 
-muteVideoBtn.addEventListener("click", async () => {
+videoBtn.addEventListener("click", async () => {
 	if (videoTrack.enabled) {
-		muteVideoBtn.innerHTML = "videocam_off";
-		muteVideoBtn.style.backgroundColor = '#e22929';
-		muteVideoBtn.style.color = 'white';
+		videoIcon.innerHTML = "videocam_off";
+		videoBtn.style.backgroundColor = '#e22929';
+		videoBtn.style.color = 'white';
 		await videoTrack.setEnabled(false);
 	} else {
-		muteVideoBtn.innerHTML = "videocam";
-		muteVideoBtn.style.backgroundColor = 'white';
-		muteVideoBtn.style.color = 'black';
+		videoIcon.innerHTML = "videocam";
+		videoBtn.style.backgroundColor = '#3be8b0';
+		videoBtn.style.color = 'black';
 		await videoTrack.setEnabled(true);
 	}
 })
 
 
-const outputDiv = document.getElementById("output");
+const outputDiv = document.getElementById("output-text");
 const languageDropdown = document.getElementById("language-dropdown");
 const inputDiv = document.getElementById("input");
 const runCodeBtn = document.getElementById("run-code-btn");
@@ -176,8 +187,11 @@ function runCode() {
 	let code = editor.getValue();
 	let language = languageDropdown.value;
 	let input = inputDiv.value;
+	let spinner = document.querySelector(".spin");
 
 	if (code) {
+		spinner.style.display = "inline-block";
+		outputDiv.innerHTML = "";
 		var myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 
@@ -207,6 +221,7 @@ function runCode() {
 			.then(response => response.text())
 			.then(result => {
 				let output = JSON.parse(result).run.output;
+				spinner.style.display = "";
 				outputDiv.innerHTML = output;
 				socket.emit("code-output", output);
 			})
@@ -222,13 +237,6 @@ socket.on("language-change", language => {
 	languageDropdown.value = language;
 	changeEditorMode(language);
 });
-
-window.onload = async function () {
-	let runtimeRes = await getRuntimes();
-	runtimeRes.forEach(element => {
-		runtimes[element.language] = element.version;
-	});
-};
 
 async function getRuntimes() {
 	var myHeaders = new Headers();

@@ -44,13 +44,18 @@ body{
 #language{
 	position: absolute;
 	top: 1%;
-	right: 1%;
+	right: 2%;
 	z-index: 2;
 }
 
 #language-dropdown{
-	height: 100%;
-	left: 45%;
+	padding: 5px;
+    height: 100%;
+    left: 45%;
+    background: #151a28;
+    color: #3be8b0;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 #firepad{
@@ -144,9 +149,39 @@ body{
 }
 
 #output{
+	position: relative;
 	background-color: #282a36;
 	color: white;
 	padding: 10px;
+}
+
+#output-text{
+	max-height: 210px;
+	overflow: auto;
+}
+
+.spin {
+	position: absolute;
+	top: 36%;
+	left: 44%;
+	display: none;
+	width: 50px;
+	height: 50px;
+	border: 3px solid rgba(255, 255, 255, .3);
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: spin 1s ease-in-out infinite;
+	-webkit-animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+to {
+	-webkit-transform: rotate(360deg);
+}
+}
+@-webkit-keyframes spin {
+to {
+	-webkit-transform: rotate(360deg);
+}
 }
 
 #video-grid {
@@ -182,13 +217,36 @@ video {
 }
 
 .control-btn{
-	background-color: ghostwhite;
+	background-color: #3be8b0;
 	width: fit-content;
 	padding: 8px;
 	margin: 10px;
 	border-radius: 3rem;
+	border: none;
 }
 
 .powered-by-firepad {
 	display: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #282a36;
+border-radius: 0.5rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 0.5rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }

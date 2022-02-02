@@ -63,13 +63,20 @@
 		<div id="input-output">
 			<textarea name="input" id="input" placeholder="Input goes here."></textarea>
 			<div id="output">
-				Output will appear here.
+				<div class="spin"></div>
+				<div id="output-text">
+					Output will appear here.
+				</div>
 			</div>
 		</div>
 		<div id="video-grid"></div>
 		<div id="controls">
-			<i id="mute_audio" class="material-icons control-btn">mic</i>
-			<i id="mute_video" class="material-icons control-btn">videocam</i>
+			<button type="button" class="control-btn" id="audio-btn" disabled>
+				<i class="material-icons" id="audio_icon">mic</i>
+			</button>
+			<button type="button" class="control-btn"id="video-btn" disabled>
+				<i class="material-icons" id="video_icon">videocam</i>
+			</button>
 		</div>
 	</div>
 </body>
