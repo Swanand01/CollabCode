@@ -59,11 +59,6 @@ let remoteUsers = {};
 
 let runtimes = {};
 
-const audioBtn = document.getElementById("audio-btn");
-const videoBtn = document.getElementById("video-btn");
-const audioIcon = document.getElementById("audio_icon");
-const videoIcon = document.getElementById("video_icon");
-
 
 async function fetchCred() {
 	let response = await fetch(`/getToken/${CHANNEL}`);
@@ -127,7 +122,7 @@ async function handleUserLeft(user) {
 
 socket.on('connect', function () {
 	socket.emit("join-room", ROOM_ID, socket.id);
-	joinAndDisplayLocalStream();
+	// joinAndDisplayLocalStream();
 });
 
 socket.on("user-disconnected", userId => {
@@ -138,6 +133,11 @@ socket.on('user-connected', async userId => {
 	console.log("New user connected: " + userId);
 })
 
+const audioBtn = document.getElementById("audio-btn");
+const videoBtn = document.getElementById("video-btn");
+const audioIcon = document.getElementById("audio_icon");
+const videoIcon = document.getElementById("video_icon");
+const shareBtn = document.getElementById("share-btn");
 
 audioBtn.addEventListener("click", async () => {
 	if (audioIcon.innerHTML === "mic_off") {
@@ -173,6 +173,30 @@ videoBtn.addEventListener("click", async () => {
 	}
 })
 
+shareBtn.addEventListener("click", () => {
+	let input = document.createElement('input');
+	input.setAttribute("type", "text");
+	input.value = window.location.href;
+	input.readOnly = true;
+
+	swal("Share code", "Anyone with access to this URL will see your code in real time.", {
+		content: input,
+		buttons: {
+			copy: {
+				text: "Copy URL",
+				value: "copy",
+			}
+		},
+	})
+		.then((value) => {
+			switch (value) {
+				case "copy":
+					navigator.clipboard.writeText(window.location.href);
+					swal("Link copied!");
+					break;
+			}
+		});
+})
 
 const outputDiv = document.getElementById("output-text");
 const languageDropdown = document.getElementById("language-dropdown");
@@ -228,11 +252,13 @@ function runCode() {
 			.catch(error => console.log('error', error));
 	}
 }
+
 runCodeBtn.addEventListener("click", runCode);
 languageDropdown.addEventListener("change", () => {
 	socket.emit("language-change", languageDropdown.value);
 	changeEditorMode(languageDropdown.value);
 })
+
 socket.on("language-change", language => {
 	languageDropdown.value = language;
 	changeEditorMode(language);
