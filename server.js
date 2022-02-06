@@ -1,8 +1,10 @@
+const appID = "YOUR_AGORA_APP_ID";
+const appCertificate = "YOUR_AGORA_APP_CERTIFICATE";
+
 const express = require('express')
 const app = express()
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
-const { v4: uuidV4 } = require("uuid");
 const { RtcTokenBuilder, RtcRole } = require('agora-access-token');
 
 app.set("view engine", "ejs");
@@ -19,8 +21,6 @@ app.get("/:room", (req, res) => {
 });
 
 app.get("/getToken/:channel", (req, res) => {
-	const appID = "8b8b3f7547914a1ca9f8b586adc338e3";
-	const appCertificate = "3c88d6c006d849e79bdeef90ffd48cf5";
 	const channelName = req.params.channel;
 	const uid = getRandInteger(1, 230);
 	const role = RtcRole.PUBLISHER;

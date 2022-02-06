@@ -1,3 +1,14 @@
+const FIREBASE_KEY = 'YOUR_FIREBASE_KEY';
+const DB_URL = 'YOUR_FIREBASE_DB_URL';
+
+const AGORA_APP_ID = "YOUR_AGORA_APP_ID";
+const CHANNEL = window.location.pathname.replace("/", "");
+let TOKEN;
+let UID;
+
+const socket = io("/");
+
+
 let editor = CodeMirror.fromTextArea(document.querySelector("#firepad"), {
 	mode: "python",
 	theme: "dracula",
@@ -6,7 +17,6 @@ let editor = CodeMirror.fromTextArea(document.querySelector("#firepad"), {
 		"Ctrl-Space": "autocomplete"
 	},
 })
-
 
 editor.on("keyup", function (cm, event) {
 	if (!cm.state.completionActive &&   /*Enables keyboard navigation in autocomplete list*/
@@ -18,8 +28,8 @@ editor.on("keyup", function (cm, event) {
 async function init() {
 	// Initialize the Firebase SDK.
 	firebase.initializeApp({
-		apiKey: 'AIzaSyDD-SKMBbTcTtvQ1XyzWNKMPxpNrpATZMM',
-		databaseURL: 'https://collabcode-21b1b-default-rtdb.firebaseio.com/'
+		apiKey: FIREBASE_KEY,
+		databaseURL: DB_URL
 	});
 
 	// Get Firebase Database reference.
@@ -38,27 +48,19 @@ async function init() {
 
 init();
 
-const socket = io("/");
-
-const APP_ID = "8b8b3f7547914a1ca9f8b586adc338e3";
-const CHANNEL = window.location.pathname.replace("/", "");
-
-let TOKEN;
-let UID;
 
 const client = AgoraRTC.createClient({
 	mode: "rtc",
 	codec: "vp8"
 });
 
-AgoraRTC.setLogLevel(4)
+AgoraRTC.setLogLevel(4);
 
 let audioTrack;
 let videoTrack;
 let remoteUsers = {};
 
 let runtimes = {};
-
 
 async function fetchCred() {
 	let response = await fetch(`/getToken/${CHANNEL}`);
@@ -74,7 +76,7 @@ async function joinAndDisplayLocalStream() {
 
 	await fetchCred();
 
-	await client.join(APP_ID, CHANNEL, TOKEN, UID);
+	await client.join(AGORA_APP_ID, CHANNEL, TOKEN, UID);
 
 	audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
 	videoTrack = await AgoraRTC.createCameraVideoTrack();
@@ -122,7 +124,7 @@ async function handleUserLeft(user) {
 
 socket.on('connect', function () {
 	socket.emit("join-room", ROOM_ID, socket.id);
-	// joinAndDisplayLocalStream();
+	joinAndDisplayLocalStream();
 });
 
 socket.on("user-disconnected", userId => {
