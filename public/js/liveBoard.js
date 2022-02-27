@@ -4,6 +4,8 @@ let canvasBounds = canvasContainer.getBoundingClientRect()
 const drawingCursor = document.querySelector('#drawing-cursor')
 let cursorBounds = drawingCursor.getBoundingClientRect()
 
+let paintObject = { path: [] }
+
 let undoStack = []
 let redoStack = []
 
@@ -45,7 +47,7 @@ function mouseDragged() {
 
     line(mouseX, mouseY, pmouseX, pmouseY)
 
-    socket.emit("send-path", { x1: mouseX, y1: mouseY, x2: pmouseX, y2: pmouseY, color, strokeWidth })
+    paintObject.path.push([mouseX, mouseY])
 
     // if slider is open close it
     sliderContainer.style.display = ""
@@ -55,7 +57,14 @@ function mouseReleased() {
     if (!isDrawing)
         return
 
-    socket.emit("send-path", { "drawingEnd": true })
+    paintObject.color = color
+    paintObject.strokeWidth = strokeWidth
+
+    socket.emit("send-paint-path", paintObject)
+
+    // clear the paint object
+    paintObject.path = []
+
     saveState(ctx.toDataURL())
 }
 
@@ -66,6 +75,22 @@ function saveState(state) {
     undoStack.push(state)
 }
 
+
+function paintPath(paintObject) {
+    const path = paintObject.path
+
+    stroke(paintObject.color)
+    strokeWeight(paintObject.strokeWidth)
+
+    for (let i = 0; i < path.length - 1; i++) {
+        line(path[i][0], path[i][1], path[i + 1][0], path[i + 1][1])
+    }
+
+    // after painting save to undo stack
+    saveState(ctx.toDataURL())
+}
+
+// socket evnets
 socket.on("send-state", user => {
     socket.emit("send-canvas-state", user, ctx.toDataURL(), undoStack, redoStack)
 })
@@ -79,22 +104,13 @@ socket.on("get-canvas-state", (data, undoData, redoData) => {
     redoStack = [...redoData]
 })
 
+socket.on("paint", paintObject => {
+    paintPath(paintObject)
+})
+
 socket.on('clear-canvas', () => {
     saveState(ctx.toDataURL())
     background(backgroundColor)
-})
-
-
-socket.on("draw", payload => {
-    if (payload.drawingEnd) {
-        saveState(ctx.toDataURL())
-        return
-    }
-
-    stroke(payload.color)
-    strokeWeight(payload.strokeWidth)
-
-    line(payload.x1, payload.y1, payload.x2, payload.y2)
 })
 
 
@@ -169,7 +185,9 @@ canvasContainer.addEventListener("mousemove", (e) => {
     if (e.target && !(e.target.matches('#defaultCanvas0') || e.target.matches('#drawing-cursor')))
         return
 
+    // to stop wierd cursor artifacts while drawing
     e.preventDefault()
+
     drawingCursor.style.left = (e.clientX - canvasBounds.left - cursorBounds.width / 2) + "px"
     drawingCursor.style.top = (e.clientY - canvasBounds.top - cursorBounds.height / 2) + "px"
 })

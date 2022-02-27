@@ -79,8 +79,8 @@ io.on("connection", socket => {
 			socket.to(roomId).emit('clear-canvas')
 		})
 
-		socket.on("send-path", payload => {
-			socket.to(roomId).emit("draw", payload)
+		socket.on("send-paint-path", paintObject => {
+			socket.to(roomId).emit("paint", paintObject)
 		})
 
 		socket.on("undo-triggered", () => {
