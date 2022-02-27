@@ -124,7 +124,7 @@ async function handleUserLeft(user) {
 
 socket.on('connect', function () {
 	socket.emit("join-room", ROOM_ID, socket.id);
-	// joinAndDisplayLocalStream();
+	joinAndDisplayLocalStream();
 });
 
 socket.on("user-disconnected", userId => {
