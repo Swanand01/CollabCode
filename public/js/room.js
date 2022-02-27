@@ -1,7 +1,7 @@
-const FIREBASE_KEY = 'YOUR_FIREBASE_KEY';
-const DB_URL = 'YOUR_FIREBASE_DB_URL';
+const FIREBASE_KEY = 'AIzaSyDD-SKMBbTcTtvQ1XyzWNKMPxpNrpATZMM';
+const DB_URL = 'https://collabcode-21b1b-default-rtdb.firebaseio.com/';
 
-const AGORA_APP_ID = "YOUR_AGORA_APP_ID";
+const AGORA_APP_ID = "8b8b3f7547914a1ca9f8b586adc338e3";
 const CHANNEL = window.location.pathname.replace("/", "");
 let TOKEN;
 let UID;
