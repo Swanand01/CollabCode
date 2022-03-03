@@ -10,13 +10,13 @@
 	</script>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+
 	<script src="/socket.io/socket.io.js"></script>
 
 	<link rel="stylesheet" href="css/codemirror/codemirror.css">
 	<link rel="stylesheet" href="css/codemirror/dracula.css">
 	<link rel="stylesheet" href="css/codemirror/show-hint.css">
-	
+
 	<script src="js/codemirror/codemirror.js"></script>
 	<script src="js/codemirror/show-hint.js"></script>
 	<script src="js/codemirror/javascript-hint.js"></script>
@@ -40,7 +40,11 @@
 	<!-- Sweet alert -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+	<!-- P5 js CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+
 	<link rel="stylesheet" href="css/room.css">
+	<link rel="stylesheet" href="css/liveBoard.css">
 </head>
 
 <body>
@@ -54,20 +58,40 @@
 		</div>
 	</div>
 	<div id="main-div">
-		<div id="code-area">
-			<div id="language">
-				<select name="language" id="language-dropdown">
-					<option value="python">Python</option>
-					<option value="javascript">Javascript</option>
-					<option value="c">C</option>
-					<option value="c++">C++</option>
-					<option value="go">Go</option>
-					<option value="java">Java</option>
-					<option value="csharp">C#</option>
-				</select>
+		<main>
+			<div id="code-area">
+				<div id="language">
+					<select name="language" id="language-dropdown">
+						<option value="python">Python</option>
+						<option value="javascript">Javascript</option>
+						<option value="c">C</option>
+						<option value="c++">C++</option>
+						<option value="go">Go</option>
+						<option value="java">Java</option>
+						<option value="csharp">C#</option>
+					</select>
+				</div>
+				<textarea id="firepad"></textarea>
 			</div>
-			<textarea id="firepad"></textarea>
-		</div>
+			<div id="canvasContainer">
+				<div id="drawing-cursor"></div>
+				<div id="settings-div">
+					<div class="setting-icon">
+						<div class="color-unit" id="color1"></div>
+					</div>
+					<div id="color-picker" class="setting-icon"></div>
+					<input type="color" id="stroke-color" name="stroke-color" value="#3be8b0">
+					<div class="slidecontainer">
+						<input type="range" min="1" max="50" value="5" class="slider" id="stroke-Range">
+					</div>
+					<div id="brush-size" class="setting-icon"></div>
+					<div id="eraser" class="setting-icon"></div>
+					<div id="clear-canvas" class="setting-icon"></div>
+					<div id="undoBtn" class="setting-icon"></div>
+					<div id="redoBtn" class="setting-icon"></div>
+				</div>
+			</div>
+		</main>
 		<div id="input-output">
 			<textarea name="input" id="input" placeholder="Input goes here."></textarea>
 			<div id="output">
@@ -77,17 +101,19 @@
 				</div>
 			</div>
 		</div>
+
 		<div id="video-grid"></div>
 		<div id="controls">
 			<button type="button" class="control-btn" id="audio-btn" disabled>
 				<i class="material-icons" id="audio_icon">mic</i>
 			</button>
-			<button type="button" class="control-btn"id="video-btn" disabled>
+			<button type="button" class="control-btn" id="video-btn" disabled>
 				<i class="material-icons" id="video_icon">videocam</i>
 			</button>
 		</div>
 	</div>
 </body>
 <script src="js/room.js"></script>
+<script src="js/liveBoard.js"></script>
 
 </html>

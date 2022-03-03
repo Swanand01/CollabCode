@@ -1,5 +1,7 @@
-const appID = "YOUR_AGORA_APP_ID";
-const appCertificate = "YOUR_AGORA_APP_CERTIFICATE";
+require('dotenv').config()
+
+const appID = process.env.APP_ID
+const appCertificate = process.env.APP_CERTIFICATE
 
 const express = require('express')
 const app = express()
@@ -56,6 +58,37 @@ io.on("connection", socket => {
 
 		socket.on("language-change", (language) => {
 			socket.broadcast.to(roomId).emit("language-change", language);
+		})
+
+		// live board related events
+		let clientSet = io.sockets.adapter.rooms.get(roomId)
+		let host
+		if (clientSet)
+			host = [...clientSet][0]
+
+		socket.join(roomId)
+
+		if (host)
+			socket.to(host).emit('send-state', socket.id)
+
+		socket.on("send-canvas-state", (user, data, undoStack, redoStack) => {
+			socket.to(user).emit("get-canvas-state", data, undoStack, redoStack)
+		})
+
+		socket.on("trigger-clear-canvas", roomId => {
+			socket.to(roomId).emit('clear-canvas')
+		})
+
+		socket.on("send-paint-path", paintObject => {
+			socket.to(roomId).emit("paint", paintObject)
+		})
+
+		socket.on("undo-triggered", () => {
+			socket.to(roomId).emit("undo")
+		})
+
+		socket.on("redo-triggered", () => {
+			socket.to(roomId).emit("redo")
 		})
 	})
 })
