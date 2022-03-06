@@ -53,11 +53,11 @@ Try out CollabCode [here](https://collab-code-app.herokuapp.com/).
 
 3. Create a Agora project. [Agora Docs](https://docs.agora.io/en/Agora%20Platform/get_appid_token?platform=Web).
 
-4. In `server.js` , set the following constants:
+4. Create a .env file in the root directory, and set the following constants:
 
-    `const appID = "YOUR_AGORA_APP_ID";`
+    `APP_ID = "YOUR_AGORA_APP_ID"`
 
-    `const appCertificate = "YOUR_AGORA_APP_CERTIFICATE";`
+    `APP_CERTIFICATE = "YOUR_AGORA_APP_CERTIFICATE"`
 
 5. Create a [Firebase](https://console.firebase.google.com/) project.
 
@@ -72,4 +72,3 @@ Try out CollabCode [here](https://collab-code-app.herokuapp.com/).
    `const AGORA_APP_ID = "YOUR_AGORA_APP_ID";`
 
 8. Run `npm run devStart` .
-
