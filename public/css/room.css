@@ -5,7 +5,10 @@ html{
 }
 
 body{
-	height: 90vh;
+	display: grid;
+	grid-template-rows: auto 1fr;
+
+	height: 100vh;
 	margin: 0;
 	background-color: #151a28;
 }
@@ -26,18 +29,31 @@ body{
 
 #main-div{
 	display: grid;
-	height: 100%;
+	height: 90vh;
 	margin: 0 10px;
 	column-gap: 10px;
-	grid-template-columns: 1.5fr 1fr;
-	grid-template-areas: "code-area input-output"
-						"code-area video-grid"
-						"controls controls";
+	row-gap: 10px;
+	grid-template-columns:1fr 1fr;
+	grid-template-areas: 
+	"main main"
+	"input-output video-grid"
+	"controls controls";
+}
+
+main{
+	grid-area: main;
+	width: 100%;
+	height: 55vh;
+
+	display: flex;
+
+	column-gap: 10px;
 }
 
 #code-area{
+	width: 50%;
+	height: 100%;
 	grid-area: code-area;
-	height: 80vh;
 	position: relative;
 }
 
@@ -151,17 +167,10 @@ body{
 	border: none;
 }
 
-#input-output{
-	grid-area: input-output;
-
-	display: grid;
-	grid-template-rows: 4fr 6fr;
-	row-gap: 10px;
-
-	height: 56vh;
-}
-
 #input{
+	grid-area: input;
+	width: 50%;
+	height: 20vh;
 	resize: none;
 	color: white;
 	background-color: #282a36;
@@ -183,6 +192,8 @@ body{
 }
 
 #output{
+	grid-area: output;
+	width: 50%;
 	position: relative;
 	background-color: #282a36;
 	color: white;
@@ -222,6 +233,7 @@ body{
 
 #video-grid {
 	grid-area: video-grid;
+	width: 50%;
 	display: flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
@@ -242,8 +254,6 @@ video {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 10vh;
-	width: 100%;
 	background-color: #151a28;
 }
 
