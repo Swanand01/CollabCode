@@ -17,7 +17,7 @@ A collaborative, real-time, online coding environment for developers.
 
 ## Try it!
 
-Try out CollabCode [here](https://collab-code-app.herokuapp.com/).
+Try out CollabCode [here](https://collabcode.onrender.com/).
 
 
 
@@ -54,6 +54,7 @@ Try out CollabCode [here](https://collab-code-app.herokuapp.com/).
 3. Create a Agora project. [Agora Docs](https://docs.agora.io/en/Agora%20Platform/get_appid_token?platform=Web).
 
 4. Create a .env file in the root directory, and set the following constants:
+    `NODE_ENV = development`
 
     `APP_ID = "YOUR_AGORA_APP_ID"`
 
