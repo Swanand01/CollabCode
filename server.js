@@ -1,4 +1,6 @@
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
 
 const appID = process.env.APP_ID
 const appCertificate = process.env.APP_CERTIFICATE
