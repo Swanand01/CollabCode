@@ -48,61 +48,66 @@
 </head>
 
 <body>
-	<div id="header">
-		<a href="/">
-			<div id="header-title">CollabCode</div>
-		</a>
-		<div id="run-code-btn">RUN</div>
-		<div id="share-btn">
-			<i class="material-icons">share</i>
-		</div>
-	</div>
-	<div id="main-div">
-		<main>
-			<div id="code-area">
-				<div id="language">
-					<select name="language" id="language-dropdown">
-						<option value="python">Python</option>
-						<option value="javascript">Javascript</option>
-						<option value="c">C</option>
-						<option value="c++">C++</option>
-						<option value="go">Go</option>
-						<option value="java">Java</option>
-						<option value="csharp">C#</option>
-					</select>
-				</div>
-				<textarea id="firepad"></textarea>
-			</div>
-			<div id="canvasContainer">
-				<div id="drawing-cursor"></div>
-				<div id="settings-div">
-					<div class="setting-icon">
-						<div class="color-unit" id="color1"></div>
-					</div>
-					<div id="color-picker" class="setting-icon"></div>
-					<input type="color" id="stroke-color" name="stroke-color" value="#3be8b0">
-					<div class="slidecontainer">
-						<input type="range" min="1" max="50" value="5" class="slider" id="stroke-Range">
-					</div>
-					<div id="brush-size" class="setting-icon"></div>
-					<div id="eraser" class="setting-icon"></div>
-					<div id="clear-canvas" class="setting-icon"></div>
-					<div id="undoBtn" class="setting-icon"></div>
-					<div id="redoBtn" class="setting-icon"></div>
-				</div>
-			</div>
-		</main>
-		<div id="input-output">
-			<textarea name="input" id="input" placeholder="Input goes here."></textarea>
-			<div id="output">
-				<div class="spin"></div>
-				<div id="output-text">
-					Output will appear here.
-				</div>
+	<main>
+		<div id="header">
+			<a href="/">
+				<div id="header-title">CollabCode</div>
+			</a>
+			<div id="run-code-btn">RUN</div>
+			<div id="share-btn">
+				<i class="material-icons">share</i>
 			</div>
 		</div>
+		<div id="main-div">
+			<div class="left-div">
+				<div id="code-area">
+					<div id="language">
+						<select name="language" id="language-dropdown">
+							<option value="python">Python</option>
+							<option value="javascript">Javascript</option>
+							<option value="c">C</option>
+							<option value="c++">C++</option>
+							<option value="go">Go</option>
+							<option value="java">Java</option>
+							<option value="csharp">C#</option>
+						</select>
+					</div>
+					<textarea id="firepad"></textarea>
+				</div>
+				<div id="input-output">
+					<textarea name="input" id="input" placeholder="Input goes here."></textarea>
+					<div id="output">
+						<div class="spin"></div>
+						<div id="output-text">
+							Output will appear here.
+						</div>
+					</div>
+				</div>
+			</div>
 
-		<div id="video-grid"></div>
+			<div class="right-div">
+				<div id="canvasContainer">
+					<div id="drawing-cursor"></div>
+					<div id="settings-div">
+						<div class="setting-icon">
+							<div class="color-unit" id="color1"></div>
+						</div>
+						<div id="color-picker" class="setting-icon"></div>
+						<input type="color" id="stroke-color" name="stroke-color" value="#3be8b0">
+						<div class="slidecontainer">
+							<input type="range" min="1" max="50" value="5" class="slider" id="stroke-Range">
+						</div>
+						<div id="brush-size" class="setting-icon"></div>
+						<div id="eraser" class="setting-icon"></div>
+						<div id="clear-canvas" class="setting-icon"></div>
+						<div id="undoBtn" class="setting-icon"></div>
+						<div id="redoBtn" class="setting-icon"></div>
+					</div>
+				</div>
+
+				<div id="video-grid"></div>
+			</div>
+		</div>
 		<div id="controls">
 			<button type="button" class="control-btn" id="audio-btn" disabled>
 				<i class="material-icons" id="audio_icon">mic</i>
@@ -111,7 +116,7 @@
 				<i class="material-icons" id="video_icon">videocam</i>
 			</button>
 		</div>
-	</div>
+	</main>
 </body>
 <script src="js/room.js"></script>
 <script src="js/liveBoard.js"></script>
