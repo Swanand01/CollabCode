@@ -1,0 +1,12 @@
+node_modules
+dist
+data
+.superpowers
+graphify-out/
+.env
+.env.local
+.DS_Store
+.agents/
+.claude/
+.mcp.json
+skills-lock.json

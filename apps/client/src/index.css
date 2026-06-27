@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 213 31% 91%;
+    --border: 216 34% 17%;
+    --primary: 213 94% 55%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215 20% 55%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --radius: 0.5rem;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; overflow: hidden; }
+body { font-family: system-ui, sans-serif; background: hsl(var(--background)); color: hsl(var(--foreground)); }
