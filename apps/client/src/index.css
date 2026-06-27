@@ -4,19 +4,57 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 213 31% 91%;
-    --border: 216 34% 17%;
-    --primary: 213 94% 55%;
-    --primary-foreground: 0 0% 100%;
-    --muted: 223 47% 11%;
-    --muted-foreground: 215 20% 55%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --radius: 0.5rem;
+    --background: 24 24 24;
+    --foreground: 204 204 204;
+    --muted: 30 30 30;
+    --muted-foreground: 110 110 118;
+    --card: 24 24 24;
+    --card-foreground: 204 204 204;
+    --popover: 37 37 38;
+    --popover-foreground: 204 204 204;
+    --border: 45 45 45;
+    --input: 45 45 45;
+    --primary: 0 122 204;
+    --primary-foreground: 255 255 255;
+    --secondary: 30 30 30;
+    --secondary-foreground: 204 204 204;
+    --accent: 55 55 60;
+    --accent-foreground: 220 220 220;
+    --destructive: 232 17 35;
+    --destructive-foreground: 255 255 255;
+    --ring: 0 122 204;
+    --radius: 0.25rem;
+
+    /* Semantic tokens */
+    --success: 74 222 128;
+    --output-stdout: 134 239 172;
+    --output-stderr: 252 165 165;
+    --video-overlay: 0 0 0;
   }
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body, #root { height: 100%; overflow: hidden; }
-body { font-family: system-ui, sans-serif; background: hsl(var(--background)); color: hsl(var(--foreground)); }
+html {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  touch-action: manipulation;
+}
+
+.cm-editor {
+  height: 100%;
+}
+
+.cm-scroller {
+  overflow: auto;
+}
