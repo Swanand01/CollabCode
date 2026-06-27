@@ -11,7 +11,7 @@ describe('LobbyView', () => {
 
   it('shows denied message when denied=true', () => {
     render(<LobbyView displayName="Alex" onRetry={vi.fn()} denied={true} />);
-    expect(screen.getByText(/didn't let you in/i)).toBeInTheDocument();
+    expect(screen.getByText(/did not let you in/i)).toBeInTheDocument();
   });
 
   it('calls onRetry when Try Again is clicked', () => {

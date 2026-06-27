@@ -305,7 +305,7 @@ describe('POST /rooms/:id/execute', () => {
 
     const res = await request(app)
       .post(`/rooms/${room.roomId}/execute`)
-      .send({ userId: host.userId, language: 'javascript', code: 'console.log(\"hello\")' })
+      .send({ userId: host.userId, language: 'javascript', code: 'console.log("hello")' })
       .expect(200);
 
     expect(res.body).toEqual({ stdout: 'hello\n', stderr: '', exitCode: 0 });

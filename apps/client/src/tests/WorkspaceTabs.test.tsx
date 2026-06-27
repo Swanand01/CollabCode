@@ -36,11 +36,14 @@ vi.mock('allotment', () => {
     );
   }
 
-  Allotment.Pane = ({ children, minSize }: { children: React.ReactNode; minSize?: number }) => (
-    <div data-min-size={minSize} data-testid="allotment-pane">
-      {children}
-    </div>
-  );
+  function AllotmentPane({ children, minSize }: { children: React.ReactNode; minSize?: number }) {
+    return (
+      <div data-min-size={minSize} data-testid="allotment-pane">
+        {children}
+      </div>
+    );
+  }
+  Allotment.Pane = AllotmentPane;
 
   return { Allotment };
 });
@@ -52,7 +55,7 @@ function renderWorkspaceTabs() {
       userId="u1"
       displayName="Alex"
       ydoc={{} as never}
-      provider={null}
+      awareness={null}
       connected={true}
       output={{
         status: 'idle',
