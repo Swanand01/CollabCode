@@ -18,8 +18,8 @@ interface AdmittedRoomProps {
 }
 
 export default function AdmittedRoom({ roomId, userId, displayName }: AdmittedRoomProps) {
-  const { ydoc, provider, connected } = useYjs(roomId, userId);
-  const users = useAwareness(provider, userId, displayName);
+  const { ydoc, awareness, connected } = useYjs(roomId, userId);
+  const users = useAwareness(awareness, userId, displayName);
   const { output, setOutput } = useExecutionOutput(ydoc);
   const [running, setRunning] = useState(false);
   const hostSecret = sessionStorage.getItem('hostSecret') ?? undefined;
@@ -88,7 +88,7 @@ export default function AdmittedRoom({ roomId, userId, displayName }: AdmittedRo
         userId={userId}
         displayName={displayName}
         ydoc={ydoc}
-        provider={provider}
+        awareness={awareness}
         connected={connected}
         running={running}
         onRun={handleRun}

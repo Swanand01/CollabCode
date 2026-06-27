@@ -7,12 +7,14 @@ import OutputPanel from './OutputPanel';
 import 'allotment/dist/style.css';
 import type { ExecutionOutput, LanguageId } from '../types';
 
+type Awareness = HocuspocusProvider['awareness'];
+
 interface WorkspaceTabsProps {
   roomId: string;
   userId: string;
   displayName: string;
   ydoc: Y.Doc;
-  provider: HocuspocusProvider | null;
+  awareness: Awareness | null;
   connected: boolean;
   running?: boolean;
   onRun?: (request: { language: LanguageId; code: string }) => void | Promise<void>;
@@ -24,7 +26,7 @@ export default function WorkspaceTabs({
   userId,
   displayName,
   ydoc,
-  provider,
+  awareness,
   connected,
   running,
   onRun,
@@ -49,7 +51,7 @@ export default function WorkspaceTabs({
             <Allotment.Pane minSize={220}>
               <EditorPanel
                 ydoc={ydoc}
-                provider={provider}
+                awareness={awareness}
                 connected={connected}
                 running={running}
                 onRun={onRun}

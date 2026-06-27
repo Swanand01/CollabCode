@@ -22,9 +22,11 @@ import {
 import type { LanguageId } from '../../types';
 import { editorFontSizeTheme } from './editorFontSizeTheme';
 
+type Awareness = HocuspocusProvider['awareness'];
+
 interface EditorPanelProps {
   ydoc: Y.Doc;
-  provider: HocuspocusProvider | null;
+  awareness: Awareness | null;
   connected: boolean;
   running?: boolean;
   onRun?: (request: { language: LanguageId; code: string }) => void | Promise<void>;
@@ -61,7 +63,7 @@ function isLanguageId(value: unknown): value is LanguageId {
 
 export default function EditorPanel({
   ydoc,
-  provider,
+  awareness,
   connected,
   running = false,
   onRun,
@@ -79,7 +81,7 @@ export default function EditorPanel({
   const initialFontSizeRef = useRef(fontSize);
 
   useEffect(() => {
-    if (!containerRef.current || !provider) return;
+    if (!containerRef.current || !awareness) return;
 
     const yText = ydoc.getText('content');
     const yMeta = ydoc.getMap<LanguageId>('meta');
@@ -100,7 +102,7 @@ export default function EditorPanel({
             indentWithTab,
           ]),
         ),
-        yCollab(yText, provider.awareness),
+        yCollab(yText, awareness),
       ],
       parent: containerRef.current,
     });
@@ -123,7 +125,7 @@ export default function EditorPanel({
       view.destroy();
       viewRef.current = null;
     };
-  }, [editable, fontSizeTheme, language, provider, ydoc]);
+  }, [awareness, editable, fontSizeTheme, language, ydoc]);
 
   useEffect(() => {
     if (!viewRef.current) return;

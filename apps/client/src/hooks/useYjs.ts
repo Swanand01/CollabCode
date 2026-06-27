@@ -1,29 +1,33 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HocuspocusProvider } from '@hocuspocus/provider';
 import * as Y from 'yjs';
 
+type Awareness = HocuspocusProvider['awareness'];
+
 export function useYjs(roomId: string, userId: string) {
-  const ydocRef = useRef<Y.Doc>(new Y.Doc());
-  const [provider, setProvider] = useState<HocuspocusProvider | null>(null);
+  const [ydoc] = useState(() => new Y.Doc());
+  const [awareness, setAwareness] = useState<Awareness | null>(null);
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    const nextProvider = new HocuspocusProvider({
+    const provider = new HocuspocusProvider({
       url: `ws://${window.location.hostname}:1234`,
       name: `editor:${roomId}`,
-      document: ydocRef.current,
+      document: ydoc,
       token: userId,
-      onConnect: () => setConnected(true),
+      onConnect: () => {
+        setConnected(true);
+        setAwareness(provider.awareness);
+      },
       onDisconnect: () => setConnected(false),
     });
 
-    setProvider(nextProvider);
     return () => {
-      nextProvider.destroy();
-      setProvider(null);
+      provider.destroy();
+      setAwareness(null);
       setConnected(false);
     };
-  }, [roomId, userId]);
+  }, [roomId, userId, ydoc]);
 
-  return { ydoc: ydocRef.current, provider, connected };
+  return { ydoc, awareness, connected };
 }

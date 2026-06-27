@@ -3,17 +3,16 @@ import type { HocuspocusProvider } from '@hocuspocus/provider';
 import type { AwarenessUser } from '../types';
 import { colorForUserId, colorLightForUserId } from '../lib/colors';
 
+type Awareness = HocuspocusProvider['awareness'];
+
 export function useAwareness(
-  provider: HocuspocusProvider | null,
+  awareness: Awareness | null,
   userId: string,
   displayName: string,
 ) {
   const [users, setUsers] = useState<AwarenessUser[]>([]);
 
   useEffect(() => {
-    if (!provider) return;
-
-    const awareness = provider.awareness;
     if (!awareness) return;
 
     const localUser = {
@@ -39,7 +38,7 @@ export function useAwareness(
     return () => {
       awareness.off('update', syncUsers);
     };
-  }, [displayName, provider, userId]);
+  }, [awareness, displayName, userId]);
 
   return users;
 }
