@@ -1306,7 +1306,7 @@ git commit -m "feat(server): entry point — start Express + Hocuspocus"
 - Create: `apps/client/src/tests/colors.test.ts`
 - Create: `apps/client/index.html`
 
-- [ ] **Step 1: Write failing tests for api.ts and colors.ts**
+- [x] **Step 1: Write failing tests for api.ts and colors.ts**
 
 ```typescript
 // apps/client/src/tests/colors.test.ts
@@ -1399,7 +1399,7 @@ describe('admit', () => {
 });
 ```
 
-- [ ] **Step 2: Run — expect failure**
+- [x] **Step 2: Run — expect failure**
 
 ```bash
 cd apps/client && npx vitest run src/tests/colors.test.ts src/tests/api.test.ts
@@ -1407,7 +1407,7 @@ cd apps/client && npx vitest run src/tests/colors.test.ts src/tests/api.test.ts
 
 Expected: module not found errors.
 
-- [ ] **Step 3: Write types.ts**
+- [x] **Step 3: Write types.ts**
 
 ```typescript
 // apps/client/src/types.ts
@@ -1431,7 +1431,7 @@ export type JoinStatusResponse =
   | { status: 'admitted'; userId: string };
 ```
 
-- [ ] **Step 4: Write colors.ts**
+- [x] **Step 4: Write colors.ts**
 
 ```typescript
 // apps/client/src/lib/colors.ts
@@ -1449,7 +1449,7 @@ export function colorForUserId(userId: string): string {
 }
 ```
 
-- [ ] **Step 5: Write api.ts**
+- [x] **Step 5: Write api.ts**
 
 ```typescript
 // apps/client/src/lib/api.ts
@@ -1508,7 +1508,7 @@ export async function admit(
 }
 ```
 
-- [ ] **Step 6: Write main.tsx, App.tsx, index.html**
+- [x] **Step 6: Write main.tsx, App.tsx, index.html**
 
 ```tsx
 // apps/client/src/main.tsx
@@ -1564,7 +1564,7 @@ export default function App() {
 </html>
 ```
 
-- [ ] **Step 7: Run tests — expect pass**
+- [x] **Step 7: Run tests — expect pass**
 
 ```bash
 cd apps/client && npx vitest run src/tests/colors.test.ts src/tests/api.test.ts
@@ -1587,7 +1587,7 @@ git commit -m "feat(client): scaffold, routing, api.ts, colors.ts"
 - Create: `apps/client/src/pages/HomePage.tsx`
 - Create: `apps/client/src/tests/HomePage.test.tsx`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```tsx
 // apps/client/src/tests/HomePage.test.tsx
@@ -1654,7 +1654,7 @@ describe('HomePage', () => {
 });
 ```
 
-- [ ] **Step 2: Run — expect failure**
+- [x] **Step 2: Run — expect failure**
 
 ```bash
 cd apps/client && npx vitest run src/tests/HomePage.test.tsx
@@ -1662,7 +1662,7 @@ cd apps/client && npx vitest run src/tests/HomePage.test.tsx
 
 Expected: `Cannot find module '../pages/HomePage'`
 
-- [ ] **Step 3: Write HomePage.tsx**
+- [x] **Step 3: Write HomePage.tsx**
 
 ```tsx
 // apps/client/src/pages/HomePage.tsx
@@ -1748,7 +1748,7 @@ export default function HomePage() {
 }
 ```
 
-- [ ] **Step 4: Run tests — expect pass**
+- [x] **Step 4: Run tests — expect pass**
 
 ```bash
 cd apps/client && npx vitest run src/tests/HomePage.test.tsx
@@ -1772,7 +1772,7 @@ git commit -m "feat(client): HomePage with create and join room flows"
 - Create: `apps/client/src/components/LobbyView.tsx`
 - Create: `apps/client/src/tests/LobbyView.test.tsx`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```tsx
 // apps/client/src/tests/LobbyView.test.tsx
@@ -1801,7 +1801,7 @@ describe('LobbyView', () => {
 });
 ```
 
-- [ ] **Step 2: Run — expect failure**
+- [x] **Step 2: Run — expect failure**
 
 ```bash
 cd apps/client && npx vitest run src/tests/LobbyView.test.tsx
@@ -1809,7 +1809,7 @@ cd apps/client && npx vitest run src/tests/LobbyView.test.tsx
 
 Expected: `Cannot find module '../components/LobbyView'`
 
-- [ ] **Step 3: Write LobbyView.tsx**
+- [x] **Step 3: Write LobbyView.tsx**
 
 ```tsx
 // apps/client/src/components/LobbyView.tsx
@@ -1844,7 +1844,7 @@ export default function LobbyView({ displayName, denied, onRetry }: LobbyViewPro
 }
 ```
 
-- [ ] **Step 4: Write useRoom.ts**
+- [x] **Step 4: Write useRoom.ts**
 
 ```typescript
 // apps/client/src/hooks/useRoom.ts
@@ -1899,7 +1899,7 @@ export function useRoom(roomId: string, displayName: string) {
 }
 ```
 
-- [ ] **Step 5: Run tests — expect pass**
+- [x] **Step 5: Run tests — expect pass**
 
 ```bash
 cd apps/client && npx vitest run src/tests/LobbyView.test.tsx
@@ -1924,7 +1924,7 @@ git commit -m "feat(client): useRoom hook with lobby polling + LobbyView"
 
 Note: These hooks wrap external libraries (Hocuspocus WebSocket, Yjs Awareness) that require a live WebSocket server to test meaningfully. We write them without unit tests and verify through manual integration in Task 13.
 
-- [ ] **Step 1: Write useYjs.ts**
+- [x] **Step 1: Write useYjs.ts**
 
 ```typescript
 // apps/client/src/hooks/useYjs.ts
@@ -1957,7 +1957,7 @@ export function useYjs(roomId: string, userId: string) {
 }
 ```
 
-- [ ] **Step 2: Write useAwareness.ts**
+- [x] **Step 2: Write useAwareness.ts**
 
 ```typescript
 // apps/client/src/hooks/useAwareness.ts
@@ -1999,7 +1999,7 @@ export function useAwareness(
 }
 ```
 
-- [ ] **Step 3: Verify TypeScript**
+- [x] **Step 3: Verify TypeScript**
 
 ```bash
 cd apps/client && npx tsc --noEmit
@@ -2023,7 +2023,7 @@ git commit -m "feat(client): useYjs and useAwareness hooks"
 - Create: `apps/client/src/components/RoomShell.tsx`
 - Create: `apps/client/src/components/VideoSidebar.tsx`
 
-- [ ] **Step 1: Write VideoSidebar.tsx (stub)**
+- [x] **Step 1: Write VideoSidebar.tsx (stub)**
 
 ```tsx
 // apps/client/src/components/VideoSidebar.tsx
@@ -2061,7 +2061,7 @@ export default function VideoSidebar({ users }: VideoSidebarProps) {
 }
 ```
 
-- [ ] **Step 2: Write RoomShell.tsx**
+- [x] **Step 2: Write RoomShell.tsx**
 
 ```tsx
 // apps/client/src/components/RoomShell.tsx
@@ -2108,7 +2108,7 @@ export default function RoomShell({ roomId, users, isHost, children, outputPanel
 }
 ```
 
-- [ ] **Step 3: Write RoomPage.tsx**
+- [x] **Step 3: Write RoomPage.tsx**
 
 ```tsx
 // apps/client/src/pages/RoomPage.tsx
@@ -2189,7 +2189,7 @@ function AdmittedRoom({ roomId, userId, displayName }: { roomId: string; userId:
 }
 ```
 
-- [ ] **Step 4: Verify TypeScript**
+- [x] **Step 4: Verify TypeScript**
 
 ```bash
 cd apps/client && npx tsc --noEmit
@@ -2211,7 +2211,7 @@ git commit -m "feat(client): RoomPage + RoomShell layout + VideoSidebar stub"
 **Files:**
 - Create: `apps/client/src/components/EditorPanel.tsx`
 
-- [ ] **Step 1: Write EditorPanel.tsx**
+- [x] **Step 1: Write EditorPanel.tsx**
 
 ```tsx
 // apps/client/src/components/EditorPanel.tsx
@@ -2276,7 +2276,7 @@ export default function EditorPanel({ ydoc, provider, connected }: EditorPanelPr
 }
 ```
 
-- [ ] **Step 2: Verify TypeScript**
+- [x] **Step 2: Verify TypeScript**
 
 ```bash
 cd apps/client && npx tsc --noEmit
@@ -2298,7 +2298,7 @@ git commit -m "feat(client): EditorPanel with CodeMirror 6 + y-codemirror Yjs bi
 **Files:**
 - Create: `apps/client/src/components/OutputPanel.tsx`
 
-- [ ] **Step 1: Write OutputPanel.tsx**
+- [x] **Step 1: Write OutputPanel.tsx**
 
 ```tsx
 // apps/client/src/components/OutputPanel.tsx
@@ -2328,7 +2328,7 @@ git commit -m "feat(client): OutputPanel stub (Phase 4 will wire execution)"
 - Create: `apps/client/src/components/KnockBanner.tsx`
 - Create: `apps/client/src/tests/KnockBanner.test.tsx`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 ```tsx
 // apps/client/src/tests/KnockBanner.test.tsx
@@ -2365,7 +2365,7 @@ describe('KnockBanner', () => {
 });
 ```
 
-- [ ] **Step 2: Run — expect failure**
+- [x] **Step 2: Run — expect failure**
 
 ```bash
 cd apps/client && npx vitest run src/tests/KnockBanner.test.tsx
@@ -2373,7 +2373,7 @@ cd apps/client && npx vitest run src/tests/KnockBanner.test.tsx
 
 Expected: `Cannot find module '../components/KnockBanner'`
 
-- [ ] **Step 3: Write KnockBanner.tsx**
+- [x] **Step 3: Write KnockBanner.tsx**
 
 ```tsx
 // apps/client/src/components/KnockBanner.tsx
@@ -2417,7 +2417,7 @@ export default function KnockBanner({ knocks, onAdmit, onDeny }: KnockBannerProp
 }
 ```
 
-- [ ] **Step 4: Write usePing.ts**
+- [x] **Step 4: Write usePing.ts**
 
 ```typescript
 // apps/client/src/hooks/usePing.ts
@@ -2461,7 +2461,7 @@ export function usePing(roomId: string, userId: string, hostSecret?: string) {
 }
 ```
 
-- [ ] **Step 5: Run KnockBanner tests — expect pass**
+- [x] **Step 5: Run KnockBanner tests — expect pass**
 
 ```bash
 cd apps/client && npx vitest run src/tests/KnockBanner.test.tsx
@@ -2469,7 +2469,7 @@ cd apps/client && npx vitest run src/tests/KnockBanner.test.tsx
 
 Expected: all PASS.
 
-- [ ] **Step 6: Run all client tests**
+- [x] **Step 6: Run all client tests**
 
 ```bash
 cd apps/client && npx vitest run
@@ -2477,7 +2477,7 @@ cd apps/client && npx vitest run
 
 Expected: all PASS.
 
-- [ ] **Step 7: Run all server tests**
+- [x] **Step 7: Run all server tests**
 
 ```bash
 cd apps/server && npx vitest run
@@ -2485,7 +2485,7 @@ cd apps/server && npx vitest run
 
 Expected: all PASS.
 
-- [ ] **Step 8: Verify full TypeScript compile**
+- [x] **Step 8: Verify full TypeScript compile**
 
 ```bash
 cd apps/client && npx tsc --noEmit
@@ -2505,7 +2505,7 @@ git commit -m "feat(client): usePing heartbeat + KnockBanner admit/deny UI"
 
 ## Task 16: Integration Smoke Test
 
-- [ ] **Step 1: Start Hocuspocus + Room API**
+- [x] **Step 1: Start Hocuspocus + Room API**
 
 ```bash
 cd apps/server && npm run dev
@@ -2513,7 +2513,7 @@ cd apps/server && npm run dev
 
 Expected: `Room API listening on http://localhost:3000` and `Hocuspocus listening on ws://localhost:1234`
 
-- [ ] **Step 2: Start client dev server**
+- [x] **Step 2: Start client dev server**
 
 ```bash
 cd apps/client && npm run dev
@@ -2521,29 +2521,29 @@ cd apps/client && npm run dev
 
 Expected: Vite server at `http://localhost:5173`
 
-- [ ] **Step 3: Open two browser tabs**
+- [x] **Step 3: Open two browser tabs**
 
 Open `http://localhost:5173` in two separate tabs (or windows).
 
-- [ ] **Step 4: Create a room in Tab 1**
+- [x] **Step 4: Create a room in Tab 1**
   - Enter your name → click **Create Room**
   - You should land on `/room/<id>` with the editor visible
   - You are the host (green "host" badge in top bar)
 
-- [ ] **Step 5: Join in Tab 2**
+- [x] **Step 5: Join in Tab 2**
   - Go to `http://localhost:5173`
   - Enter a different name, paste the room ID from the URL
   - Click **Join Room**
   - You should see the "Waiting for the host" spinner
 
-- [ ] **Step 6: Admit in Tab 1**
+- [x] **Step 6: Admit in Tab 1**
   - KnockBanner should appear within 3s with the joiner's name
   - Click **Admit**
 
-- [ ] **Step 7: Verify Tab 2 enters the room**
+- [x] **Step 7: Verify Tab 2 enters the room**
   - Within 2s the joiner should land in the room with the editor
 
-- [ ] **Step 8: Verify real-time sync**
+- [x] **Step 8: Verify real-time sync**
   - Type in the editor in Tab 1 → text appears in Tab 2 in real time
   - Type in Tab 2 → appears in Tab 1
 
