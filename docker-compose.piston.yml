@@ -1,0 +1,17 @@
+services:
+  piston:
+    image: ghcr.io/engineer-man/piston:latest
+    container_name: collabcode_piston
+    platform: linux/amd64
+    privileged: true
+    ports:
+      - "2000:2000"
+    tmpfs:
+      - /tmp:exec
+    volumes:
+      - ./data/piston/packages:/piston/packages
+    environment:
+      PISTON_OUTPUT_MAX_SIZE: 65536 # 64 KB (default: 1024)
+      PISTON_RUN_TIMEOUT: 10000 # 10s (default: 3000)
+      PISTON_COMPILE_TIMEOUT: 15000 # 15s (default: 10000)
+      PISTON_MAX_CONCURRENT_JOBS: 32 # (default: 64)
