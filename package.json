@@ -1,15 +1,29 @@
 {
   "name": "collabcode",
   "private": true,
-  "workspaces": ["apps/*"],
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev:server": "npm run dev -w apps/server",
     "dev:client": "npm run dev -w apps/client",
-    "test": "npm run test --workspaces --if-present"
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint apps",
+    "format": "prettier --write apps"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.4",
     "@types/async-lock": "^1.4.2",
     "@types/ws": "^8.18.1",
-    "shadcn": "^4.6.0"
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.0",
+    "shadcn": "^4.6.0",
+    "typescript-eslint": "^8.62.0"
   }
 }

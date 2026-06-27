@@ -3,7 +3,9 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/index.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint src",
+    "format": "prettier --write src"
   },
   "dependencies": {
     "@hocuspocus/extension-database": "^2.13.0",
