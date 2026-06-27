@@ -49,7 +49,11 @@ export default function OutputPanel({ output }: OutputPanelProps) {
       </div>
 
       <ScrollArea className="flex-1">
-        <div role="log" aria-live="polite" className="px-3 py-2 font-mono text-sm text-output-stdout">
+        <div
+          role="log"
+          aria-live="polite"
+          className="px-3 py-2 font-mono text-sm text-output-stdout"
+        >
           {output.status === 'idle' ? (
             <span className="text-muted-foreground">Run code to see output.</span>
           ) : null}
@@ -60,7 +64,9 @@ export default function OutputPanel({ output }: OutputPanelProps) {
             <pre className="whitespace-pre-wrap text-output-stderr">{output.error}</pre>
           ) : null}
           {hasStdout ? <pre className="whitespace-pre-wrap">{output.stdout}</pre> : null}
-          {hasStderr ? <pre className="whitespace-pre-wrap text-output-stderr">{output.stderr}</pre> : null}
+          {hasStderr ? (
+            <pre className="whitespace-pre-wrap text-output-stderr">{output.stderr}</pre>
+          ) : null}
           {output.status === 'success' && !hasStdout && !hasStderr ? (
             <span className="text-muted-foreground">Process finished with no output.</span>
           ) : null}

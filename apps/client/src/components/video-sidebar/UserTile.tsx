@@ -19,7 +19,14 @@ interface UserTileProps {
   controls?: TileControls;
 }
 
-export default function UserTile({ user, isHost, isLocal, videoTrack, cameraOn, controls }: UserTileProps) {
+export default function UserTile({
+  user,
+  isHost,
+  isLocal,
+  videoTrack,
+  cameraOn,
+  controls,
+}: UserTileProps) {
   const cls = classesForUserId(user.userId);
 
   return (
@@ -52,7 +59,11 @@ export default function UserTile({ user, isHost, isLocal, videoTrack, cameraOn, 
               onClick={controls.onToggleMic}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-background text-foreground hover:bg-muted"
             >
-              {controls.micOn ? <Mic size={15} /> : <MicOff size={15} className="text-destructive" />}
+              {controls.micOn ? (
+                <Mic size={15} />
+              ) : (
+                <MicOff size={15} className="text-destructive" />
+              )}
             </button>
             <button
               type="button"

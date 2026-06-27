@@ -25,22 +25,97 @@ const HEX_PALETTE: Array<{ color: string; light: string }> = [
 ];
 
 const CLASS_PALETTE: UserColorClasses[] = [
-  { bg: 'bg-user-red',       text: 'text-user-red',       border: 'border-user-red',       ring: 'ring-user-red'       },
-  { bg: 'bg-user-emerald',   text: 'text-user-emerald',   border: 'border-user-emerald',   ring: 'ring-user-emerald'   },
-  { bg: 'bg-user-blue',      text: 'text-user-blue',      border: 'border-user-blue',      ring: 'ring-user-blue'      },
-  { bg: 'bg-user-amber',     text: 'text-user-amber',     border: 'border-user-amber',     ring: 'ring-user-amber'     },
-  { bg: 'bg-user-cyan',      text: 'text-user-cyan',      border: 'border-user-cyan',      ring: 'ring-user-cyan'      },
-  { bg: 'bg-user-violet',    text: 'text-user-violet',    border: 'border-user-violet',    ring: 'ring-user-violet'    },
-  { bg: 'bg-user-pink',      text: 'text-user-pink',      border: 'border-user-pink',      ring: 'ring-user-pink'      },
-  { bg: 'bg-user-indigo',    text: 'text-user-indigo',    border: 'border-user-indigo',    ring: 'ring-user-indigo'    },
-  { bg: 'bg-user-green',     text: 'text-user-green',     border: 'border-user-green',     ring: 'ring-user-green'     },
-  { bg: 'bg-user-orange',    text: 'text-user-orange',    border: 'border-user-orange',    ring: 'ring-user-orange'    },
-  { bg: 'bg-user-teal',      text: 'text-user-teal',      border: 'border-user-teal',      ring: 'ring-user-teal'      },
-  { bg: 'bg-user-purple',    text: 'text-user-purple',    border: 'border-user-purple',    ring: 'ring-user-purple'    },
-  { bg: 'bg-user-cobalt',    text: 'text-user-cobalt',    border: 'border-user-cobalt',    ring: 'ring-user-cobalt'    },
-  { bg: 'bg-user-tangerine', text: 'text-user-tangerine', border: 'border-user-tangerine', ring: 'ring-user-tangerine' },
-  { bg: 'bg-user-forest',    text: 'text-user-forest',    border: 'border-user-forest',    ring: 'ring-user-forest'    },
-  { bg: 'bg-user-rose',      text: 'text-user-rose',      border: 'border-user-rose',      ring: 'ring-user-rose'      },
+  { bg: 'bg-user-red', text: 'text-user-red', border: 'border-user-red', ring: 'ring-user-red' },
+  {
+    bg: 'bg-user-emerald',
+    text: 'text-user-emerald',
+    border: 'border-user-emerald',
+    ring: 'ring-user-emerald',
+  },
+  {
+    bg: 'bg-user-blue',
+    text: 'text-user-blue',
+    border: 'border-user-blue',
+    ring: 'ring-user-blue',
+  },
+  {
+    bg: 'bg-user-amber',
+    text: 'text-user-amber',
+    border: 'border-user-amber',
+    ring: 'ring-user-amber',
+  },
+  {
+    bg: 'bg-user-cyan',
+    text: 'text-user-cyan',
+    border: 'border-user-cyan',
+    ring: 'ring-user-cyan',
+  },
+  {
+    bg: 'bg-user-violet',
+    text: 'text-user-violet',
+    border: 'border-user-violet',
+    ring: 'ring-user-violet',
+  },
+  {
+    bg: 'bg-user-pink',
+    text: 'text-user-pink',
+    border: 'border-user-pink',
+    ring: 'ring-user-pink',
+  },
+  {
+    bg: 'bg-user-indigo',
+    text: 'text-user-indigo',
+    border: 'border-user-indigo',
+    ring: 'ring-user-indigo',
+  },
+  {
+    bg: 'bg-user-green',
+    text: 'text-user-green',
+    border: 'border-user-green',
+    ring: 'ring-user-green',
+  },
+  {
+    bg: 'bg-user-orange',
+    text: 'text-user-orange',
+    border: 'border-user-orange',
+    ring: 'ring-user-orange',
+  },
+  {
+    bg: 'bg-user-teal',
+    text: 'text-user-teal',
+    border: 'border-user-teal',
+    ring: 'ring-user-teal',
+  },
+  {
+    bg: 'bg-user-purple',
+    text: 'text-user-purple',
+    border: 'border-user-purple',
+    ring: 'ring-user-purple',
+  },
+  {
+    bg: 'bg-user-cobalt',
+    text: 'text-user-cobalt',
+    border: 'border-user-cobalt',
+    ring: 'ring-user-cobalt',
+  },
+  {
+    bg: 'bg-user-tangerine',
+    text: 'text-user-tangerine',
+    border: 'border-user-tangerine',
+    ring: 'ring-user-tangerine',
+  },
+  {
+    bg: 'bg-user-forest',
+    text: 'text-user-forest',
+    border: 'border-user-forest',
+    ring: 'ring-user-forest',
+  },
+  {
+    bg: 'bg-user-rose',
+    text: 'text-user-rose',
+    border: 'border-user-rose',
+    ring: 'ring-user-rose',
+  },
 ];
 
 function paletteIndex(userId: string): number {

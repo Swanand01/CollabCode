@@ -14,7 +14,7 @@ export function usePing(roomId: string, userId: string, hostSecret?: string) {
         const result = await ping(roomId, userId);
         if (!active) return;
         setIsHost(result.isHost);
-        setKnocks(result.isHost ? result.pendingKnocks ?? [] : []);
+        setKnocks(result.isHost ? (result.pendingKnocks ?? []) : []);
       } catch {
         // transient — next tick will retry
       }
@@ -33,7 +33,7 @@ export function usePing(roomId: string, userId: string, hostSecret?: string) {
     async (requestId: string) => {
       if (!hostSecret) return;
       await admit(roomId, requestId, 'admit', hostSecret);
-      setKnocks(prev => prev.filter(knock => knock.requestId !== requestId));
+      setKnocks((prev) => prev.filter((knock) => knock.requestId !== requestId));
     },
     [hostSecret, roomId],
   );
@@ -42,7 +42,7 @@ export function usePing(roomId: string, userId: string, hostSecret?: string) {
     async (requestId: string) => {
       if (!hostSecret) return;
       await admit(roomId, requestId, 'deny', hostSecret);
-      setKnocks(prev => prev.filter(knock => knock.requestId !== requestId));
+      setKnocks((prev) => prev.filter((knock) => knock.requestId !== requestId));
     },
     [hostSecret, roomId],
   );

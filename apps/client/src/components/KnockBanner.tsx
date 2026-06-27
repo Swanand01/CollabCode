@@ -12,7 +12,7 @@ export default function KnockBanner({ knocks, onAdmit, onDeny }: KnockBannerProp
 
   return (
     <div className="fixed bottom-4 right-4 z-[350] flex w-72 flex-col gap-2">
-      {knocks.map(knock => (
+      {knocks.map((knock) => (
         <div
           key={knock.requestId}
           className="flex flex-col gap-3 rounded-lg border border-primary/30 bg-background p-4 shadow-lg ring-1 ring-primary/10"

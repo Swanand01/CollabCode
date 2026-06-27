@@ -9,8 +9,8 @@ interface VideoSidebarProps {
 }
 
 export default function VideoSidebar({ users, hostUserId, localUserId, agora }: VideoSidebarProps) {
-  const localUser = users.find(u => u.userId === localUserId);
-  const remoteAwarenessUsers = users.filter(u => u.userId !== localUserId);
+  const localUser = users.find((u) => u.userId === localUserId);
+  const remoteAwarenessUsers = users.filter((u) => u.userId !== localUserId);
 
   return (
     <aside
@@ -33,8 +33,8 @@ export default function VideoSidebar({ users, hostUserId, localUserId, agora }: 
           />
         ) : null}
 
-        {remoteAwarenessUsers.map(user => {
-          const remoteAgoraUser = agora.remoteUsers.find(r => String(r.uid) === user.userId);
+        {remoteAwarenessUsers.map((user) => {
+          const remoteAgoraUser = agora.remoteUsers.find((r) => String(r.uid) === user.userId);
           const videoTrack = remoteAgoraUser?.videoTrack ?? null;
 
           return (

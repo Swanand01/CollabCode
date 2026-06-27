@@ -5,11 +5,7 @@ import { colorForUserId, colorLightForUserId } from '../lib/colors';
 
 type Awareness = HocuspocusProvider['awareness'];
 
-export function useAwareness(
-  awareness: Awareness | null,
-  userId: string,
-  displayName: string,
-) {
+export function useAwareness(awareness: Awareness | null, userId: string, displayName: string) {
   const [users, setUsers] = useState<AwarenessUser[]>([]);
 
   useEffect(() => {
@@ -26,7 +22,7 @@ export function useAwareness(
     const syncUsers = () => {
       const states = [...awareness.getStates().values()];
       const nextUsers = states
-        .map(state => state.user)
+        .map((state) => state.user)
         .filter((user): user is AwarenessUser => Boolean(user));
       setUsers(nextUsers);
     };

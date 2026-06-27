@@ -33,18 +33,18 @@ export function useAgora(roomId: string, userId: string): AgoraState {
     client.on('user-published', async (user, mediaType) => {
       await client.subscribe(user, mediaType);
       if (mediaType === 'audio') user.audioTrack?.play();
-      setRemoteUsers(prev => {
-        const exists = prev.some(u => u.uid === user.uid);
-        return exists ? prev.map(u => (u.uid === user.uid ? user : u)) : [...prev, user];
+      setRemoteUsers((prev) => {
+        const exists = prev.some((u) => u.uid === user.uid);
+        return exists ? prev.map((u) => (u.uid === user.uid ? user : u)) : [...prev, user];
       });
     });
 
-    client.on('user-unpublished', user => {
-      setRemoteUsers(prev => prev.map(u => (u.uid === user.uid ? user : u)));
+    client.on('user-unpublished', (user) => {
+      setRemoteUsers((prev) => prev.map((u) => (u.uid === user.uid ? user : u)));
     });
 
-    client.on('user-left', user => {
-      setRemoteUsers(prev => prev.filter(u => u.uid !== user.uid));
+    client.on('user-left', (user) => {
+      setRemoteUsers((prev) => prev.filter((u) => u.uid !== user.uid));
     });
 
     async function onTokenWillExpire() {
@@ -132,5 +132,13 @@ export function useAgora(roomId: string, userId: string): AgoraState {
     setMicOn(next);
   }
 
-  return { localVideoTrack, localAudioTrack, remoteUsers, cameraOn, micOn, toggleCamera, toggleMic };
+  return {
+    localVideoTrack,
+    localAudioTrack,
+    remoteUsers,
+    cameraOn,
+    micOn,
+    toggleCamera,
+    toggleMic,
+  };
 }

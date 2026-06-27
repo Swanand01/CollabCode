@@ -46,7 +46,11 @@ app.post('/rooms/:id/join', (req, res) => {
   const room = store.getRoom(req.params.id);
   if (!room) return res.status(404).json({ error: 'Room not found' });
 
-  const { displayName, hostSecret, userId: existingUserId } = req.body as {
+  const {
+    displayName,
+    hostSecret,
+    userId: existingUserId,
+  } = req.body as {
     displayName?: string;
     hostSecret?: string;
     userId?: string;
@@ -162,7 +166,7 @@ app.get('/rooms/:id/ping', (req, res) => {
   if (isHost) {
     return res.json({
       isHost: true,
-      pendingKnocks: store.getPendingKnocks(req.params.id).map(k => ({
+      pendingKnocks: store.getPendingKnocks(req.params.id).map((k) => ({
         requestId: k.requestId,
         displayName: k.displayName,
       })),
@@ -228,7 +232,12 @@ app.post('/rooms/:id/execute', async (req, res) => {
     const message = error instanceof Error ? error.name : '';
     return res
       .status(message === 'TimeoutError' || message === 'AbortError' ? 504 : 503)
-      .json({ error: message === 'TimeoutError' || message === 'AbortError' ? 'Execution timeout' : 'Execution unavailable' });
+      .json({
+        error:
+          message === 'TimeoutError' || message === 'AbortError'
+            ? 'Execution timeout'
+            : 'Execution unavailable',
+      });
   }
 });
 

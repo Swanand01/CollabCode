@@ -6,7 +6,9 @@ const rooms = new Map<string, Room>();
 const ALPHA = 'abcdefghijklmnopqrstuvwxyz';
 
 function randomSegment(len: number): string {
-  return Array.from({ length: len }, () => ALPHA[Math.floor(Math.random() * ALPHA.length)]).join('');
+  return Array.from({ length: len }, () => ALPHA[Math.floor(Math.random() * ALPHA.length)]).join(
+    '',
+  );
 }
 
 function generateRoomId(): string {
@@ -53,7 +55,7 @@ export function getParticipantByDisplayName(
   const normalized = normalizeDisplayName(displayName);
   return (
     [...room.participants.values()].find(
-      participant => normalizeDisplayName(participant.displayName) === normalized,
+      (participant) => normalizeDisplayName(participant.displayName) === normalized,
     ) ?? null
   );
 }
@@ -96,7 +98,7 @@ export function getPendingKnockByDisplayName(
   const normalized = normalizeDisplayName(displayName);
   return (
     [...room.knockRequests.values()].find(
-      request =>
+      (request) =>
         request.status === 'pending' && normalizeDisplayName(request.displayName) === normalized,
     ) ?? null
   );
@@ -122,7 +124,7 @@ export function getKnockRequest(roomId: string, requestId: string): KnockRequest
 export function getPendingKnocks(roomId: string): KnockRequest[] {
   const room = rooms.get(roomId);
   if (!room) return [];
-  return [...room.knockRequests.values()].filter(r => r.status === 'pending');
+  return [...room.knockRequests.values()].filter((r) => r.status === 'pending');
 }
 
 const PARTICIPANT_TIMEOUT_MS = 30_000;

@@ -8,14 +8,10 @@ export interface PingResponse {
   pendingKnocks?: PendingKnock[];
 }
 
-export type JoinResponse =
-  | { status: 'admitted'; userId: string }
-  | { requestId: string };
+export type JoinResponse = { status: 'admitted'; userId: string } | { requestId: string };
 
 export type JoinStatusResponse =
-  | { status: 'pending' }
-  | { status: 'denied' }
-  | { status: 'admitted'; userId: string };
+  { status: 'pending' } | { status: 'denied' } | { status: 'admitted'; userId: string };
 
 export interface ExecuteResponse {
   stdout: string;

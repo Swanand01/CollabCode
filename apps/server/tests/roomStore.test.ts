@@ -1,12 +1,22 @@
 // apps/server/tests/roomStore.test.ts
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
-  createRoom, getRoom, addParticipant, removeParticipant,
-  createKnockRequest, resolveKnockRequest, getKnockRequest,
-  getPendingKnocks, heartbeat, cleanupExpiredRooms, _resetStore,
+  createRoom,
+  getRoom,
+  addParticipant,
+  removeParticipant,
+  createKnockRequest,
+  resolveKnockRequest,
+  getKnockRequest,
+  getPendingKnocks,
+  heartbeat,
+  cleanupExpiredRooms,
+  _resetStore,
 } from '../src/roomStore.js';
 
-beforeEach(() => { _resetStore(); });
+beforeEach(() => {
+  _resetStore();
+});
 
 describe('createRoom', () => {
   it('returns roomId and hostSecret', () => {

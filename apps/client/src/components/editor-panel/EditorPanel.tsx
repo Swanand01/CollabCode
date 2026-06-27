@@ -58,7 +58,7 @@ function extensionForLanguage(language: LanguageId): Extension {
 }
 
 function isLanguageId(value: unknown): value is LanguageId {
-  return typeof value === 'string' && LANGUAGES.some(language => language.id === value);
+  return typeof value === 'string' && LANGUAGES.some((language) => language.id === value);
 }
 
 export default function EditorPanel({
@@ -96,12 +96,7 @@ export default function EditorPanel({
         oneDark,
         editable.of(EditorView.editable.of(false)),
         fontSizeTheme.of(editorFontSizeTheme(initialFontSizeRef.current)),
-        Prec.highest(
-          keymap.of([
-            { key: 'Tab', run: acceptCompletion },
-            indentWithTab,
-          ]),
-        ),
+        Prec.highest(keymap.of([{ key: 'Tab', run: acceptCompletion }, indentWithTab])),
         yCollab(yText, awareness),
       ],
       parent: containerRef.current,
@@ -154,12 +149,15 @@ export default function EditorPanel({
   return (
     <section className="flex h-full flex-col overflow-hidden bg-background">
       <div className="flex h-10 shrink-0 items-center gap-2 border-b border-border bg-background px-3">
-        <Select value={selectedLanguage} onValueChange={val => handleLanguageChange(val as LanguageId)}>
+        <Select
+          value={selectedLanguage}
+          onValueChange={(val) => handleLanguageChange(val as LanguageId)}
+        >
           <SelectTrigger className="h-7 w-32 text-sm">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {LANGUAGES.map(lang => (
+            {LANGUAGES.map((lang) => (
               <SelectItem key={lang.id} value={lang.id} className="text-sm">
                 {lang.label}
               </SelectItem>

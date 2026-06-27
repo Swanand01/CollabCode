@@ -42,7 +42,7 @@ describe('classesForUserId', () => {
 
   it('returns different classes for different userIds (at least sometimes)', () => {
     const results = new Set(
-      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map(id => classesForUserId(id).bg)
+      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map((id) => classesForUserId(id).bg),
     );
     expect(results.size).toBeGreaterThan(1);
   });

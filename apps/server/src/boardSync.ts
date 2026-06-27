@@ -36,9 +36,9 @@ export function attachBoardSync(server: HttpServer): void {
       return;
     }
 
-    wss.handleUpgrade(req, socket, head, ws => {
+    wss.handleUpgrade(req, socket, head, (ws) => {
       void getBoardRoom(parsed.roomId)
-        .then(boardRoom => {
+        .then((boardRoom) => {
           boardRoom.handleSocketConnect({
             sessionId: parsed.sessionId,
             socket: ws,

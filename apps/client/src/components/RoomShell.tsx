@@ -35,7 +35,12 @@ export default function RoomShell({ roomId, children, knockBanner, sidebar }: Ro
         <span className="select-none text-muted-foreground/30">/</span>
         <span className="font-mono text-sm text-muted-foreground">{roomId}</span>
 
-        <Button variant="ghost" size="sm" onClick={copyLink} className="ml-1 gap-1.5 text-xs text-muted-foreground">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={copyLink}
+          className="ml-1 gap-1.5 text-xs text-muted-foreground"
+        >
           {copied ? <Check size={13} className="text-success" /> : <Link size={13} />}
           {copied ? 'Copied!' : 'Share'}
         </Button>
@@ -44,9 +49,7 @@ export default function RoomShell({ roomId, children, knockBanner, sidebar }: Ro
       {knockBanner}
 
       <div className="flex min-h-0 flex-1 overflow-hidden">
-        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          {children}
-        </div>
+        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">{children}</div>
         {sidebar}
       </div>
     </main>

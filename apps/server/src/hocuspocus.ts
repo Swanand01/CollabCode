@@ -11,7 +11,7 @@ export const hocuspocus = Server.configure({
     new Database({
       fetch: async ({ documentName }) => {
         try {
-          return await db.get(documentName) as unknown as Uint8Array;
+          return (await db.get(documentName)) as unknown as Uint8Array;
         } catch {
           return null;
         }
@@ -39,5 +39,4 @@ export const hocuspocus = Server.configure({
     context.userId = userId;
     context.roomId = roomId;
   },
-
 });

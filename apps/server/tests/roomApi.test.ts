@@ -32,10 +32,7 @@ describe('GET /rooms/:id', () => {
 
 describe('POST /rooms/:id/join', () => {
   it('returns 404 for unknown room', async () => {
-    await request(app)
-      .post('/rooms/nope/join')
-      .send({ displayName: 'Sam' })
-      .expect(404);
+    await request(app).post('/rooms/nope/join').send({ displayName: 'Sam' }).expect(404);
   });
 
   it('admits host immediately when hostSecret matches', async () => {
@@ -56,7 +53,9 @@ describe('POST /rooms/:id/join', () => {
     const { _resetStore: _, ...storeModule } = await import('../src/roomStore.js');
     for (let i = 0; i < 9; i++) {
       storeModule.addParticipant(room.roomId, {
-        userId: `u${i}`, displayName: `P${i}`, joinedAt: Date.now(),
+        userId: `u${i}`,
+        displayName: `P${i}`,
+        joinedAt: Date.now(),
       });
     }
     const res = await request(app)
@@ -158,9 +157,7 @@ describe('GET /rooms/:id/join-status/:requestId', () => {
 
   it('returns 404 for unknown requestId', async () => {
     const { body: room } = await request(app).post('/rooms');
-    await request(app)
-      .get(`/rooms/${room.roomId}/join-status/doesnotexist`)
-      .expect(404);
+    await request(app).get(`/rooms/${room.roomId}/join-status/doesnotexist`).expect(404);
   });
 });
 
@@ -241,9 +238,7 @@ describe('GET /rooms/:id/ping', () => {
     const { body: join } = await request(app)
       .post(`/rooms/${room.roomId}/join`)
       .send({ displayName: 'Host', hostSecret: room.hostSecret });
-    await request(app)
-      .post(`/rooms/${room.roomId}/join`)
-      .send({ displayName: 'Alex' });
+    await request(app).post(`/rooms/${room.roomId}/join`).send({ displayName: 'Alex' });
     const res = await request(app)
       .get(`/rooms/${room.roomId}/ping?userId=${join.userId}`)
       .expect(200);
@@ -262,8 +257,9 @@ describe('GET /rooms/:id/ping', () => {
     await request(app)
       .post(`/rooms/${room.roomId}/admit`)
       .send({ requestId: knock.requestId, decision: 'admit', hostSecret: room.hostSecret });
-    const { body: pollJoin } = await request(app)
-      .get(`/rooms/${room.roomId}/join-status/${knock.requestId}`);
+    const { body: pollJoin } = await request(app).get(
+      `/rooms/${room.roomId}/join-status/${knock.requestId}`,
+    );
     const res = await request(app)
       .get(`/rooms/${room.roomId}/ping?userId=${pollJoin.userId}`)
       .expect(200);

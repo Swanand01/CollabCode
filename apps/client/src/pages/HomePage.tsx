@@ -142,8 +142,7 @@ export default function HomePage() {
         </div>
 
         <h1 className="mb-3 text-balance text-4xl font-bold tracking-tight text-foreground">
-          Code Together,{' '}
-          <span className="text-primary">In Real Time.</span>
+          Code Together, <span className="text-primary">In Real Time.</span>
         </h1>
         <p className="mb-10 text-sm text-muted-foreground">
           Collaborative editor + whiteboard for your team.
@@ -158,8 +157,8 @@ export default function HomePage() {
               placeholder="Alice…"
               value={name}
               disabled={isBusy}
-              onChange={e => setName(e.target.value)}
-              onKeyDown={e => {
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => {
                 if (e.key === 'Enter' && canSubmit && !isBusy) {
                   void (isCreateMode ? handleCreate() : handleJoin());
                 }
@@ -179,8 +178,8 @@ export default function HomePage() {
                 placeholder="asd-wzmx-qbu…"
                 value={roomId}
                 disabled={isBusy}
-                onChange={e => setRoomId(e.target.value)}
-                onKeyDown={e => {
+                onChange={(e) => setRoomId(e.target.value)}
+                onKeyDown={(e) => {
                   if (e.key === 'Enter' && canSubmit && !isBusy) void handleJoin();
                 }}
                 spellCheck={false}
@@ -199,10 +198,10 @@ export default function HomePage() {
             {joinPhase === 'denied' && (
               <p className="text-xs text-destructive">The host denied your request.</p>
             )}
-            {joinPhase === 'full' && (
-              <p className="text-xs text-destructive">This room is full.</p>
-            )}
-            {error && joinPhase === 'idle' ? <p className="text-xs text-destructive">{error}</p> : null}
+            {joinPhase === 'full' && <p className="text-xs text-destructive">This room is full.</p>}
+            {error && joinPhase === 'idle' ? (
+              <p className="text-xs text-destructive">{error}</p>
+            ) : null}
           </div>
 
           {isWaiting ? (

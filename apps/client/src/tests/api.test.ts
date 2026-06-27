@@ -21,9 +21,7 @@ const server = setupServer(
       : new HttpResponse(null, { status: 404 }),
   ),
   http.post('/rooms/:id/join', () => HttpResponse.json({ status: 'admitted', userId: 'u1' })),
-  http.get('/rooms/:id/join-status/:requestId', () =>
-    HttpResponse.json({ status: 'pending' }),
-  ),
+  http.get('/rooms/:id/join-status/:requestId', () => HttpResponse.json({ status: 'pending' })),
   http.get('/rooms/:id/ping', () => HttpResponse.json({ isHost: true, pendingKnocks: [] })),
   http.post('/rooms/:id/admit', () => HttpResponse.json({ ok: true })),
   http.post('/rooms/:id/execute', () =>
