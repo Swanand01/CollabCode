@@ -8,7 +8,17 @@ export default defineConfig({
     alias: { '@': path.resolve(__dirname, './src') },
   },
   server: {
-    proxy: { '/rooms': 'http://localhost:3000' },
+    proxy: {
+      '/rooms': {
+        target: 'http://localhost:3000',
+        ws: true,
+      },
+      '/ws/hocus': {
+        target: 'http://localhost:1234',
+        ws: true,
+        rewrite: (path) => path.replace(/^\/ws\/hocus/, ''),
+      },
+    },
   },
   test: {
     environment: 'jsdom',

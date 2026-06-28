@@ -1,0 +1,8 @@
+node_modules
+apps/*/node_modules
+apps/*/dist
+apps/server/data
+apps/server/.env
+data
+.git
+graphify-out

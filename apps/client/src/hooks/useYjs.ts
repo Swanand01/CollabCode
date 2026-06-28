@@ -11,7 +11,7 @@ export function useYjs(roomId: string, userId: string) {
 
   useEffect(() => {
     const provider = new HocuspocusProvider({
-      url: `ws://${window.location.hostname}:1234`,
+      url: `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws/hocus`,
       name: `editor:${roomId}`,
       document: ydoc,
       token: userId,

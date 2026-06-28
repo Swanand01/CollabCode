@@ -1,0 +1,46 @@
+services:
+  piston:
+    image: ghcr.io/engineer-man/piston:latest
+    container_name: collabcode_piston
+    platform: linux/amd64
+    privileged: true
+    restart: unless-stopped
+    tmpfs:
+      - /tmp:exec
+    volumes:
+      - ./data/piston/packages:/piston/packages
+
+    environment:
+      PISTON_OUTPUT_MAX_SIZE: 65536
+      PISTON_RUN_TIMEOUT: 10000
+      PISTON_COMPILE_TIMEOUT: 15000
+      PISTON_MAX_CONCURRENT_JOBS: 32
+
+  server:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    container_name: collabcode_server
+    restart: unless-stopped
+    environment:
+      PISTON_URL: http://piston:2000
+      AGORA_APP_ID: ${AGORA_APP_ID}
+      AGORA_APP_CERTIFICATE: ${AGORA_APP_CERTIFICATE}
+    volumes:
+      - server-data:/app/apps/server/data
+    depends_on:
+      - piston
+
+  nginx:
+    build:
+      context: .
+      dockerfile: apps/client/Dockerfile
+    container_name: collabcode_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+volumes:
+  server-data:

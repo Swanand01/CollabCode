@@ -16,7 +16,7 @@ export function useBoardSync(roomId: string, userId: string, displayName: string
   );
 
   return useSync({
-    uri: `ws://${window.location.hostname}:3000/rooms/${encodeURIComponent(roomId)}/board-sync?userId=${encodeURIComponent(userId)}`,
+    uri: `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/rooms/${encodeURIComponent(roomId)}/board-sync?userId=${encodeURIComponent(userId)}`,
     assets: inlineBase64AssetStore,
     userInfo,
   });
