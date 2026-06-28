@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Code2 } from 'lucide-react';
+import HomeFooter from '../components/HomeFooter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -231,26 +232,22 @@ export default function HomePage() {
 
           <div className="mt-4 text-center text-sm">
             {isCreateMode ? (
-              <button
-                type="button"
-                className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                onClick={() => switchMode('join')}
-              >
+              <Button variant="link" className="text-primary" onClick={() => switchMode('join')}>
                 or join an existing room →
-              </button>
+              </Button>
             ) : (
-              <button
-                type="button"
-                className="text-muted-foreground hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              <Button
+                variant="link"
+                className="text-muted-foreground"
                 onClick={() => switchMode('create')}
               >
                 ← create a new room instead
-              </button>
+              </Button>
             )}
           </div>
         </div>
 
-        <span className="mt-16 font-mono text-xs text-muted-foreground/40">v1.0.0</span>
+        <HomeFooter />
       </div>
     </main>
   );

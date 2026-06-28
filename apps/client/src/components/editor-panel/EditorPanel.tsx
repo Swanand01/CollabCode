@@ -12,6 +12,7 @@ import { yCollab } from 'y-codemirror.next';
 import * as Y from 'yjs';
 import { Compartment, Prec, type Extension } from '@codemirror/state';
 import { Button } from '@/components/ui/button';
+import { Loader2, Minus, Play, Plus } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -170,13 +171,22 @@ export default function EditorPanel({
           size="sm"
           onClick={handleRun}
           disabled={!connected || running || !onRun}
-          className="h-7 px-3 text-sm"
+          className="h-7 px-3 text-sm [&_svg]:size-3"
         >
-          {running ? 'Running…' : 'Run'}
+          {running ? (
+            <>
+              <Loader2 className="animate-spin" />
+              Running…
+            </>
+          ) : (
+            <>
+              <Play />
+              Run
+            </>
+          )}
         </Button>
 
         <div className="ml-auto flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Font</span>
           <div className="flex h-7 items-center overflow-hidden rounded-md border border-border bg-background">
             <Button
               type="button"
@@ -187,9 +197,9 @@ export default function EditorPanel({
                 const index = FONT_SIZES.indexOf(fontSize as (typeof FONT_SIZES)[number]);
                 handleFontSizeChange(FONT_SIZES[Math.max(0, index - 1)]);
               }}
-              className="h-7 w-7 rounded-none border-none text-sm text-muted-foreground hover:text-foreground"
+              className="h-7 w-7 rounded-none border-none text-muted-foreground hover:text-foreground [&_svg]:size-3"
             >
-              −
+              <Minus />
             </Button>
             <span className="min-w-[38px] border-x border-border px-1 text-center text-sm text-muted-foreground">
               {fontSize}px
@@ -203,9 +213,9 @@ export default function EditorPanel({
                 const index = FONT_SIZES.indexOf(fontSize as (typeof FONT_SIZES)[number]);
                 handleFontSizeChange(FONT_SIZES[Math.min(FONT_SIZES.length - 1, index + 1)]);
               }}
-              className="h-7 w-7 rounded-none border-none text-sm text-muted-foreground hover:text-foreground"
+              className="h-7 w-7 rounded-none border-none text-muted-foreground hover:text-foreground [&_svg]:size-3"
             >
-              +
+              <Plus />
             </Button>
           </div>
         </div>

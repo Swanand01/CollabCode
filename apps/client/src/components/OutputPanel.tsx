@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Loader2, Terminal } from 'lucide-react';
 import type { ExecutionOutput } from '../types';
 
 interface OutputPanelProps {
@@ -34,6 +35,7 @@ export default function OutputPanel({ output }: OutputPanelProps) {
     <div className="flex h-full min-h-0 flex-col bg-background">
       <div className="flex h-7 shrink-0 items-center border-b border-border bg-background px-3">
         <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <Terminal size={15} />
           Output
           {output.ranBy ? (
             <span className="text-muted-foreground/60">ran by {output.ranBy}</span>
@@ -43,8 +45,16 @@ export default function OutputPanel({ output }: OutputPanelProps) {
           <Badge variant="outline" className={`ml-auto text-xs ${statusBadge.className}`}>
             {statusBadge.label}
           </Badge>
+        ) : output.status === 'running' ? (
+          <span className="ml-auto flex items-center gap-1.5 text-sm text-muted-foreground">
+            <Loader2 size={11} className="animate-spin" />
+            Running…
+          </span>
         ) : (
-          <span className="ml-auto text-sm text-muted-foreground">{statusLabel}</span>
+          <span className="ml-auto flex items-center gap-1.5 text-sm text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />
+            Ready
+          </span>
         )}
       </div>
 
