@@ -230,14 +230,12 @@ app.post('/rooms/:id/execute', async (req, res) => {
     });
   } catch (error) {
     const message = error instanceof Error ? error.name : '';
-    return res
-      .status(message === 'TimeoutError' || message === 'AbortError' ? 504 : 503)
-      .json({
-        error:
-          message === 'TimeoutError' || message === 'AbortError'
-            ? 'Execution timeout'
-            : 'Execution unavailable',
-      });
+    return res.status(message === 'TimeoutError' || message === 'AbortError' ? 504 : 503).json({
+      error:
+        message === 'TimeoutError' || message === 'AbortError'
+          ? 'Execution timeout'
+          : 'Execution unavailable',
+    });
   }
 });
 
