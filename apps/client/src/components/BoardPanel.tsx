@@ -45,7 +45,12 @@ export default function BoardPanel({ roomId, userId, displayName }: BoardPanelPr
   return (
     <div className="h-full w-full overflow-hidden bg-background">
       <div className="h-full w-full">
-        <Tldraw store={syncedStore.store} user={user} autoFocus />
+        <Tldraw
+          store={syncedStore.store}
+          user={user}
+          autoFocus
+          licenseKey={import.meta.env.VITE_TLDRAW_LICENSE_KEY}
+        />
       </div>
     </div>
   );

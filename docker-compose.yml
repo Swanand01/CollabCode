@@ -35,6 +35,8 @@ services:
     build:
       context: .
       dockerfile: apps/client/Dockerfile
+      args:
+        VITE_TLDRAW_LICENSE_KEY: ${VITE_TLDRAW_LICENSE_KEY}
     container_name: collabcode_nginx
     restart: unless-stopped
     ports:

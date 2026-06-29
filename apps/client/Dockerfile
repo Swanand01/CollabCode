@@ -10,6 +10,9 @@ RUN npm ci
 
 COPY apps/client ./apps/client
 
+ARG VITE_TLDRAW_LICENSE_KEY
+ENV VITE_TLDRAW_LICENSE_KEY=$VITE_TLDRAW_LICENSE_KEY
+
 RUN npm run build -w apps/client
 
 FROM nginx:alpine
