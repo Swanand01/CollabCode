@@ -240,7 +240,7 @@ app.post('/rooms/:id/execute', async (req, res) => {
 });
 
 function normalizeExecutionLanguage(language: string): string {
-  if (language === 'javascript') return 'node';
+  if (language === 'javascript') return 'javascript';
   if (language === 'typescript') return 'typescript';
   if (language === 'python') return 'python';
   if (language === 'go') return 'go';
