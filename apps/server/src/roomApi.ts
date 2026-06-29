@@ -90,6 +90,26 @@ app.post('/rooms/:id/join', (req, res) => {
     store.removeParticipant(req.params.id, existingMember.userId);
   }
 
+  // Evict stale participants before checking if room is empty
+  const now = Date.now();
+  for (const [pid, p] of room.participants) {
+    if (now - p.lastSeen > 30_000) {
+      store.removeParticipant(req.params.id, pid);
+    }
+  }
+
+  // If the room is empty, auto-admit and promote to host
+  if (room.participants.size === 0) {
+    const userId = nanoid(10);
+    store.addParticipant(req.params.id, {
+      userId,
+      displayName: trimmedDisplayName,
+      joinedAt: Date.now(),
+    });
+    room.hostUserId = userId;
+    return res.json({ status: 'admitted', userId });
+  }
+
   const knock = store.createKnockRequest(req.params.id, trimmedDisplayName);
   if (!knock) return res.status(500).json({ error: 'Internal error' });
   res.json({ requestId: knock.requestId });
